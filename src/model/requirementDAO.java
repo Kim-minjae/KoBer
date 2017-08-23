@@ -30,7 +30,7 @@ public class requirementDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.dbClose(conn, pst, null); // resultSet은 필요없으니 null이 들어감.
+			DBUtil.dbClose(conn, pst, null);  
 		}
 
 		return count;
