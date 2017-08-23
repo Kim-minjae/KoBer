@@ -18,7 +18,7 @@ public class RequirementDAO {
 
 	public int RequirementInsert(RequirementDTO rdto) {
 		conn = DBUtil.getConnect();
-		String sql = "insert into REQUIREMENT values(seq_require.NEXTVAL,?,?,?)";
+		String sql = "insert into REQUIREMENT values(require_seq.NEXTVAL,?,?,?)";
 
 		try {
 			pst = conn.prepareStatement(sql);
