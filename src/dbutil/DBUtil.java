@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
-    //¿¬°á
+    //ï¿½ï¿½ï¿½ï¿½
 	public static Connection getConnect(){
 		Connection conn = null;
 		String url= "jdbc:oracle:thin:@70.12.110.52:1521:xe";
-		String user="kunho";
+		String user="kunhotest";
 		String password="1234";
 		 try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -26,7 +26,7 @@ public class DBUtil {
 		 return conn;
 	}
 	
-	//ÇØÁ¦ 
+	//ï¿½ï¿½ï¿½ï¿½ 
 	public static void dbClose(Connection conn, 
 			   Statement st, ResultSet rs){		
 		try {

@@ -1,6 +1,6 @@
 package model;
 
-public class requirementDTO {
+public class RequirementDTO {
 	
 	private int demand_id;
 	private String start_point;
@@ -8,13 +8,13 @@ public class requirementDTO {
 	private int fellow_num;
 	
 
-	public requirementDTO() {
+	public RequirementDTO() {
 		super();
 	}
 
 
 
-	public requirementDTO(int demand_id, String start_point, String destination, int fellow_num) {
+	public RequirementDTO(int demand_id, String start_point, String destination, int fellow_num) {
 		super();
 		this.demand_id = demand_id;
 		this.start_point = start_point;
