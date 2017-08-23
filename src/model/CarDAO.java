@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.multi.model.StudentDTO;
-
 import dbutil.DBUtil;
 import model.CarDTO;
-
 public class CarDAO {
 	 Connection conn;
      PreparedStatement st;
@@ -40,9 +36,7 @@ public class CarDAO {
   				"delete from car"+
   				"where car_id=?";	
   		
-   		conn = DBUtil.getConnect();
-   		
-   		
+   		conn = DBUtil.getConnect();   		
    		try {
    			st = conn.prepareStatement(sql);
    			st.setInt(1,dto.getId());      			
