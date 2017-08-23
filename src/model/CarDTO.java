@@ -10,6 +10,8 @@ public class CarDTO {
 		return "CarDTO [id=" + id + ", car_type=" + car_type + ", capacity=" + capacity + "]";
 	}
 
+
+
 	public CarDTO(int id, String car_type, int capacity) {
 		super();
 		this.id = id;

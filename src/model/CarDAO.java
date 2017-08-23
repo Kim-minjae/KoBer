@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.multi.model.StudentDTO;
 
 import dbutil.DBUtil;
 import model.CarDTO;
 
 public class CarDAO {
+
 	 Connection conn;
      PreparedStatement st;
      ResultSet rs;
