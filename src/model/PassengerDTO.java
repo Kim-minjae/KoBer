@@ -9,19 +9,19 @@ public class PassengerDTO {
     private String passenger_phone;
     private char passenger_gender;
     private int asset;
-    private int demand_id;
+    private int requirement_id;
 
     public PassengerDTO(){
 
     }
 
-    public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, char passenger_gender, int asset, int demand_id) {
+    public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, char passenger_gender, int asset, int requirement_id) {
         this.passenger_id = passenger_id;
         this.passenger_name = passenger_name;
         this.passenger_phone = passenger_phone;
         this.passenger_gender = passenger_gender;
         this.asset = asset;
-        this.demand_id = demand_id;
+        this.requirement_id = requirement_id;
     }
 
     public int getPassenger_id() {
@@ -64,12 +64,12 @@ public class PassengerDTO {
         this.asset = asset;
     }
 
-    public int getDemand_id() {
-        return demand_id;
+    public int getRequirement_id() {
+        return requirement_id;
     }
 
-    public void setDemand_id(int demand_id) {
-        this.demand_id = demand_id;
+    public void setRequirement_id(int requirement_id) {
+        this.requirement_id = requirement_id;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class PassengerDTO {
         sb.append(", passenger_phone='").append(passenger_phone).append('\'');
         sb.append(", passenger_gender=").append(passenger_gender);
         sb.append(", asset=").append(asset);
-        sb.append(", demand_id=").append(demand_id);
+        sb.append(", requirement_id=").append(requirement_id);
         sb.append('}');
         return sb.toString();
     }
