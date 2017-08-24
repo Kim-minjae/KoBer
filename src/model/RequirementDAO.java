@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import dbutil.DBUtil;
 
-public class requirementDAO {
+public class RequirementDAO {
 
 	static Connection conn;
 	static PreparedStatement pst;
@@ -16,9 +16,9 @@ public class requirementDAO {
 	ResultSet rs;
 	int count;
 
-	public int RequirementInsert(requirementDTO rdto) {
+	public int RequirementInsert(RequirementDTO rdto) {
 		conn = DBUtil.getConnect();
-		String sql = "insert into requirement(demand_id, start_point, destination, fellow_num) values(seq_require.NEXTVAL,?,?,?)";
+		String sql = "insert into REQUIREMENT values(require_seq.NEXTVAL,?,?,?)";
 
 		try {
 			pst = conn.prepareStatement(sql);
