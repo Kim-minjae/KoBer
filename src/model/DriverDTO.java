@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class DriverDTO {
 	
-	private int driver_id;		// 운전자 pk a.i
-	private String driver_name;	// 운전자 이름
-	private String driver_phone;// 전화번호
-	private char driver_gender;	// 성별
-	private String licence_num;	// 면허증번호
-	private int range;			// 가용범위
-	private String c_position;	// 현재 위치
-	private Date c_time;		// 현재 시간
-	private String d_possible;	// 운전 가능 여부
+	private int driver_id;		 
+	private String driver_name; 
+	private String driver_phone; 
+	private char driver_gender;	 
+	private String licence_num;	 
+	private int range;		 
+	private String c_position;	 
+	private Date c_time;		 
+	private String d_possible;	 
 	
-	private int passenger_id;	// 탑승자 아이디 fk
-	private int car_id;			// 자동차 아이디 fk
+	private int passenger_id;	 
+	private int car_id;			 
 
 	
-	public DriverDTO() {//디폴트생성자
+	public DriverDTO() { 
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class DriverDTO {
 		this.d_possible = d_possible;
 		this.passenger_id = passenger_id;
 		this.car_id = car_id;
-	}//생성자
+	}//占쏙옙占쏙옙占쏙옙
 
 
 	public int getDriver_id() {
