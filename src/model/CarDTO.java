@@ -1,29 +1,28 @@
 package model;
 
 public class CarDTO {
-	int id=1;
+	int car_id;
 	String car_type;
 	int capacity;
 	
 	@Override
 	public String toString() {
-		return "CarDTO [id=" + id + ", car_type=" + car_type + ", capacity=" + capacity + "]";
+		return "CarDTO [car_id=" + car_id + ", car_type=" + car_type + ", capacity=" + capacity + "]";
 	}
 
 
 
 	public CarDTO(int id, String car_type, int capacity) {
 		super();
-		this.id = id;
 		this.car_type = car_type;
 		this.capacity = capacity;
 	}
 	
 	public int getId() {
-		return id;
+		return car_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int car_id) {
+		this.car_id = car_id;
 	}
 	public String getCar_type() {
 		return car_type;
