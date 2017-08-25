@@ -8,8 +8,8 @@ import model.RequirementDAO;
 import model.RequirementDTO;
 
 public class RequirementController {
-//	public void RequirementService() throws Exception {
-	public static void main(String[] args) throws Exception{
+	public void RequirementService() throws Exception {
+	//public static void main(String[] args) throws Exception{
  
 	Scanner sc = new Scanner(System.in);
 		String start_point, destination = null;
@@ -51,7 +51,7 @@ public class RequirementController {
 						}
 						break; //동승자 입력작업이 성공적으로 끝났으면 break를 통해 Loop3 반복문을 빠져나옴
 					} catch (NumberFormatException e) {
-						System.out.println("공백이 입렸됐습니다. 숫자를 입력하세요.");
+						System.out.println("입력되지 않았습니다.");
 					}
 
 				}
