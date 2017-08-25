@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@localhost" uuid="7f95f018-c9c3-4d4d-a37d-0aa672c1b3e4">
+    <data-source source="LOCAL" name="@70.12.110.52" uuid="c5b0e840-75f7-44bd-aefc-c17aa824d9c5">
       <driver-ref>oracle</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
+      <jdbc-url>jdbc:oracle:thin:@70.12.110.52:1521:XE</jdbc-url>
     </data-source>
   </component>
 </project>

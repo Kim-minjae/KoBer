@@ -18,6 +18,8 @@ public class DriverDAO {
  		String sql="insert into Driver values (car_seq.nextval,?,?,?,?,?,?,?)";  		
  		conn = DBUtil.getConnect();
  		try {
+ 			conn.setAutoCommit(false);
+
  			st = conn.prepareStatement(sql);
  			st.setString(1,dto.getDriver_name());
  			st.setString(2, dto.getDrver_phone());
@@ -28,9 +30,13 @@ public class DriverDAO {
  			st.setString(7, dto.getDrive_possible());
  			//st.setInt(8, dto.getPassenger_id());
  			//st.setInt(9, dto.getCar_id());
- 			count = st.executeUpdate(); 
+ 			count = st.executeUpdate();
+
+
+// 			if(LogAction.log(LogDTO dto)); 이게 성공했을때 commit 하면됨. conn.commit();
  		} catch (SQLException e) {
  			e.printStackTrace();
+ 			//conn.rollback();
  		} finally {
  			DBUtil.dbClose(conn, st, rs);
  		}
