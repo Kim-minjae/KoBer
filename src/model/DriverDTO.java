@@ -4,7 +4,7 @@ public class DriverDTO {
 	int driver_id;
 	String driver_name;
 	String drver_phone;
-	char driver_gender;
+	String driver_gender;
 	String licence_num;
 	int range;
 	String current_pos;
@@ -15,7 +15,7 @@ public class DriverDTO {
 	public DriverDTO() {
 		super();
 	}
-	public DriverDTO(int driver_id, String driver_name, String drver_phone, char driver_gender, String licence_num,
+	public DriverDTO(int driver_id, String driver_name, String drver_phone, String driver_gender, String licence_num,
 			int range, String current_pos, String drive_possible, int passenger_id, int car_id) {
 		super();
 		this.driver_id = driver_id;
@@ -55,10 +55,10 @@ public class DriverDTO {
 	public void setDrver_phone(String drver_phone) {
 		this.drver_phone = drver_phone;
 	}
-	public char getDriver_gender() {
+	public String getDriver_gender() {
 		return driver_gender;
 	}
-	public void setDriver_gender(char driver_gender) {
+	public void setDriver_gender(String driver_gender) {
 		this.driver_gender = driver_gender;
 	}
 	public String getLicence_num() {

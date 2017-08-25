@@ -6,19 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import dbutil.DBUtil;
 
-public class Payment_Per_CarTypeDAO {
+public class Payment_CarDAO {
 	 Connection conn;
      PreparedStatement st;
      ResultSet rs;
      int count;
-	public int payment_per_cartypeSetting(Payment_Per_CarTypeDTO dto){
-  		String sql="insert into Payment_Per_Cartype values (?,?,?)";  		
+	public int payment_per_cartypeSetting(Payment_CarDTO dto){
+  		String sql="insert into payment_car values (?,?)";  		
   		conn = DBUtil.getConnect();
   		try {
   			st = conn.prepareStatement(sql);
-  			st.setInt(1,dto.getSmall());
-  			st.setInt(2,dto.getMedium());
-  			st.setInt(3, dto.getBig());
   			count = st.executeUpdate(); 
   			
   		} catch (SQLException e) {
