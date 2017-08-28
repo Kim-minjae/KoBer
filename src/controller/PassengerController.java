@@ -35,7 +35,7 @@ public class PassengerController {
 		}
 
 		Loop2: while (true) { // 휴대전화 입력 반복문
-			System.out.println("휴대전화를 입력하세요.(특수문자 포함하여 입력): ");
+			System.out.println("휴대전화를 입력하세요.(특수문자 제외 입력): ");
 			passenger_phone =br.readLine();
 			String regExp = "(010|016|019|011)\\d{3,4}\\d{4}";
 			boolean result = Pattern.matches((regExp), passenger_phone);
@@ -80,10 +80,10 @@ public class PassengerController {
 		result2=dao.createPassengerAccount(dto);
 
 		if(result2>0){
-			System.out.println("운전자 등록 성공");
+			System.out.println("탑승자 등록 성공");
 		}else
 		{
-			System.out.println("운전자 등록 실패");
+			System.out.println("탑승자 등록 실패");
 		}
 	}
 }

@@ -25,9 +25,9 @@ public class CarDAO {
 			rs = st.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("car_id");
-				int capacity = rs.getInt("capacity");
-				String car_type = rs.getString("car_type");
+				dto.setId(c_id);
+				dto.setCar_type(rs.getString("car_type"));
+				dto.setCapacity(rs.getInt("capacity"));
 			}
 
 		} catch (SQLException e) {

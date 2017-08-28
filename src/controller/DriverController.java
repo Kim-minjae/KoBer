@@ -35,7 +35,7 @@ public class DriverController {
 		}
 
 		Loop2: while (true) { // 휴대전화 입력 반복문
-			System.out.println("휴대전화를 입력하세요.(특수문자 포함하여 입력): ");
+			System.out.println("휴대전화를 입력하세요.(특수문자 제외 입력): ");
 			driver_phone = sc.nextLine();
 			String regExp = "(010|016|019|011)\\d{3,4}\\d{4}";
 			boolean rss = Pattern.matches((regExp), driver_phone);

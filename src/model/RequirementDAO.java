@@ -27,10 +27,10 @@ public class RequirementDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				int id = rs.getInt("requirement_id");
-				String stp = rs.getString("start_point");
-				String det = rs.getString("destination");
-				int fellow_num = rs.getInt("fellow_num");
+				dto.setDemand_id(r_id);
+				dto.setStart_point(rs.getString("start_point"));
+				dto.setDestination(rs.getString("destination"));
+				dto.setFellow_num(rs.getInt("fellow_num"));
 			}
 
 		} catch (SQLException e) {
