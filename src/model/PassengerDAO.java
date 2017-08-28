@@ -13,9 +13,8 @@ public class PassengerDAO {
     static PreparedStatement pst;
     Statement st;
     ResultSet rs;
-    int count;
 
-    public int passengerInsert(PassengerDTO passengerDTO) {
+    public void createPassengerAccount(PassengerDTO passengerDTO) {
 
         conn = DBUtil.getConnect();
         String sql = "insert into passenger(passenger_id,passenger_name,passenger_phone,passenger_gender,asset,requirement_id) VALUES (seq_require.NEXTVAL,?,?,?,?,?,?)";
@@ -33,6 +32,27 @@ public class PassengerDAO {
             e.printStackTrace();
         }
 
-        return count;
+        return;
+    }
+
+    //이거 리턴이 -1이면 아이디 없다는거다. 로그인 못한다는것이다!!
+    public int P_login(String passenger_phone, String passenger_name) throws Exception{
+
+        int tmp = -1;
+
+        conn = DBUtil.getConnect();
+        String sql = "SELECT * from PASSENGER WHERE PASSENGER_PHONE = ? AND  PASSENGER_NAME = ?";
+
+        pst = conn.prepareStatement(sql);
+        pst.setString(1,passenger_phone);
+        pst.setString(2,passenger_name);
+        rs = pst.executeQuery();
+
+        if(rs.next()){
+            tmp = rs.getInt("passenger_id");
+        }
+
+        return tmp;
+
     }
 }

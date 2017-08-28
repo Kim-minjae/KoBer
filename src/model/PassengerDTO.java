@@ -7,7 +7,7 @@ public class PassengerDTO {
     private int passenger_id;
     private String passenger_name;
     private String passenger_phone;
-    private char passenger_gender;
+    private String passenger_gender;
     private int asset;
     private int requirement_id;
 
@@ -15,7 +15,7 @@ public class PassengerDTO {
 
     }
 
-    public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, char passenger_gender, int asset, int requirement_id) {
+    public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, String passenger_gender, int asset, int requirement_id) {
         this.passenger_id = passenger_id;
         this.passenger_name = passenger_name;
         this.passenger_phone = passenger_phone;
@@ -48,11 +48,11 @@ public class PassengerDTO {
         this.passenger_phone = passenger_phone;
     }
 
-    public char getPassenger_gender() {
+    public String getPassenger_gender() {
         return passenger_gender;
     }
 
-    public void setPassenger_gender(char passenger_gender) {
+    public void setPassenger_gender(String passenger_gender) {
         this.passenger_gender = passenger_gender;
     }
 

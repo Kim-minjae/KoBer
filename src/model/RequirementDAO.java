@@ -54,12 +54,12 @@ public class RequirementDAO {
 			pst.setInt(3, rdto.getFellow_num());
 
 			count = pst.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbClose(conn, pst, rs);
 		}
-
 		return count;
 	}
 
