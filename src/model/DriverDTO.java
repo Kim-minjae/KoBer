@@ -8,15 +8,46 @@ public class DriverDTO {
 	String licence_num;
 	int range;
 	String current_pos;
-	String drive_possible;
+	int drive_possible;
 	int passenger_id;
 	int car_id;
 	
 	public DriverDTO() {
 		super();
 	}
+	
+	
+	
+	
+	public DriverDTO(String driver_name, String drver_phone, String driver_gender, String licence_num, int range,
+			String current_pos, int drive_possible) {
+		super();
+		this.driver_name = driver_name;
+		this.drver_phone = drver_phone;
+		this.driver_gender = driver_gender;
+		this.licence_num = licence_num;
+		this.range = range;
+		this.drive_possible = drive_possible;
+		this.current_pos = current_pos;
+	}
+
+
+
+
+	public DriverDTO(String driver_name, String drver_phone, String driver_gender, String licence_num, int range,
+			String current_pos) {
+		super();
+		this.driver_name = driver_name;
+		this.drver_phone = drver_phone;
+		this.driver_gender = driver_gender;
+		this.licence_num = licence_num;
+		this.range = range;
+		this.current_pos = current_pos;
+	}
+
+
 	public DriverDTO(int driver_id, String driver_name, String drver_phone, String driver_gender, String licence_num,
-			int range, String current_pos, String drive_possible, int passenger_id, int car_id) {
+			int range, String current_pos, int drive_possible, int passenger_id, int car_id) {
 		super();
 		this.driver_id = driver_id;
 		this.driver_name = driver_name;
@@ -79,10 +110,10 @@ public class DriverDTO {
 	public void setCurrent_pos(String current_pos) {
 		this.current_pos = current_pos;
 	}
-	public String getDrive_possible() {
+	public int getDrive_possible() {
 		return drive_possible;
 	}
-	public void setDrive_possible(String drive_possible) {
+	public void setDrive_possible(int drive_possible) {
 		this.drive_possible = drive_possible;
 	}
 	public int getPassenger_id() {

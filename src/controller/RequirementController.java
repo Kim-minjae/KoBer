@@ -58,7 +58,7 @@ public class RequirementController {
 				result = dao.RequirementInsert(dto);
 				String msg = "입력에 실패";
 				if (result > 0) {
-					System.out.println("입력에 성공");
+					System.out.println("요구사항 입력 성공");
 				} else {
 					System.out.println(msg);
 				}
@@ -68,7 +68,7 @@ public class RequirementController {
 				
 			} // catch end
 
-		} // try end
+		} 
 
 	} // RequirementService() end
 } // class end

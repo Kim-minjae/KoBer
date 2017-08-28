@@ -16,6 +16,33 @@ public class RequirementDAO {
 	ResultSet rs;
 	int count;
 
+	public RequirementDTO getRequirement(int r_id) {
+		RequirementDTO dto = null;
+		conn = DBUtil.getConnect();
+		String sql = "select *from requirement where requirement_id=?";
+
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, r_id);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("requirement_id");
+				String stp = rs.getString("start_point");
+				String det = rs.getString("destination");
+				int fellow_num = rs.getInt("fellow_num");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, pst, rs);
+		}
+
+		return dto;
+
+	}
+
 	public int RequirementInsert(RequirementDTO rdto) {
 		conn = DBUtil.getConnect();
 		String sql = "insert into REQUIREMENT values(require_seq.NEXTVAL,?,?,?)";
@@ -30,7 +57,7 @@ public class RequirementDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBUtil.dbClose(conn, pst, null);  
+			DBUtil.dbClose(conn, pst, rs);
 		}
 
 		return count;

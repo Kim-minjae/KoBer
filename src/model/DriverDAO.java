@@ -15,7 +15,7 @@ public class DriverDAO {
     int count;
    //insert
    public int driverInsert(DriverDTO dto){
- 		String sql="insert into Driver values (car_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
+ 		String sql="insert into Driver(driver_id, driver_name, driver_phone, driver_gender,licence_num, range, current_pos, driver_possible) values (car_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
  		conn = DBUtil.getConnect();
  		try {
  			conn.setAutoCommit(false);
@@ -27,7 +27,7 @@ public class DriverDAO {
  			st.setString(4, dto.getLicence_num());
  			st.setInt(5, dto.getRange());
  			st.setString(6, dto.getCurrent_pos());
- 			st.setString(7, dto.getDrive_possible());
+ 			st.setInt(7, dto.getDrive_possible());
  
  			count = st.executeUpdate(); 
  		} catch (SQLException e) {
