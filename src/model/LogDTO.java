@@ -12,6 +12,16 @@ public class LogDTO {
 	public LogDTO() {
 	
 	}
+	
+	
+
+	public LogDTO(int log_user, String log_action) {
+		super();
+		this.log_user = log_user;
+		this.log_action = log_action;
+	}
+
+
 
 	public LogDTO(int log_id, int log_user, String log_action, Date log_time) {
 		super();

@@ -14,8 +14,20 @@ public class DriverDAO {
     ResultSet rs;
     int count;
    //insert
+    
+    public int loadDriverId(Connection conn) throws SQLException{
+    	int pid = 0;
+    	String sql = "select max(driver_id) from Driver";
+		st = conn.prepareStatement(sql);
+		rs = st.executeQuery();
+		while (rs.next()) {
+			pid = rs.getInt("max(driver_id)");
+		}
+    	 return pid;
+    }
+    
    public int driverInsert(DriverDTO dto){
- 		String sql="insert into Driver(driver_id, driver_name, driver_phone, driver_gender,licence_num, range, current_pos, driver_possible) values (car_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
+ 		String sql="insert into Driver(driver_id, driver_name, driver_phone, driver_gender,licence_num, range, current_pos, d_possible) values (driver_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
  		conn = DBUtil.getConnect();
  		try {
  			conn.setAutoCommit(false);
@@ -33,10 +45,18 @@ public class DriverDAO {
  			count = st.executeUpdate();
 
 
+            int tmpid = loadDriverId(conn) ;
+            LogDTO ldto = new LogDTO(tmpid,"운전자 등록");
+           LogAction.logInsert(conn, ldto);
+            conn.commit();
 // 			if(LogAction.log(LogDTO dto)); 이게 성공했을때 commit 하면됨. conn.commit();
  		} catch (SQLException e) {
+ 			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
  			e.printStackTrace();
- 			//conn.rollback();
  		} finally {
  			DBUtil.dbClose(conn, st, rs);
  		}
