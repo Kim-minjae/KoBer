@@ -10,7 +10,6 @@ public class PassengerDTO {
     private String passenger_gender;
     private int asset;
     private int requirement_id;
-
     public PassengerDTO(){
 
     }
