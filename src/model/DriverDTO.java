@@ -22,7 +22,7 @@ public class DriverDTO {
 			String current_pos, int drive_possible) {
 		super();
 		this.driver_name = driver_name;
-		this.drver_phone = drver_phone;
+		 this.drver_phone = drver_phone;
 		this.driver_gender = driver_gender;
 		this.licence_num = licence_num;
 		this.range = range;
