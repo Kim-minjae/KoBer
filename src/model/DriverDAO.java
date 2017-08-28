@@ -27,7 +27,7 @@ public class DriverDAO {
  			st.setString(4, dto.getLicence_num());
  			st.setInt(5, dto.getRange());
  			st.setString(6, dto.getCurrent_pos());
- 			st.setString(7, dto.getDrive_possible());
+ 			st.setInt(7, dto.getDrive_possible());
  			//st.setInt(8, dto.getPassenger_id());
  			//st.setInt(9, dto.getCar_id());
  			count = st.executeUpdate();
@@ -73,5 +73,57 @@ public class DriverDAO {
  			DBUtil.dbClose(conn, st, rs);
  		}
  		return count;
- 	}
+   }
+
+   public DriverDTO getDriver(int driver_id)throws SQLException{
+
+   	conn = DBUtil.getConnect();
+
+   	String sql = "SELECT * from DRIVER WHERE DRIVER_ID = ?";
+
+   	DriverDTO tmp = null;
+
+   	st = conn.prepareStatement(sql);
+   	st.setInt(1,driver_id);
+
+   	rs = st.executeQuery();
+
+   	if(rs.next()){
+   		tmp.setCar_id(driver_id);
+   		tmp.setDrver_phone(rs.getString("driver_phone"));
+   		tmp.setDriver_name(rs.getString("driver_name"));
+   		tmp.setDriver_gender(rs.getString("driver_gender"));
+   		tmp.setLicence_num(rs.getString("licence_num"));
+   		tmp.setRange(rs.getInt("range"));
+   		tmp.setCurrent_pos(rs.getString("currnet_pos"));
+   		tmp.setDrive_possible(rs.getInt("d_possible"));
+   		tmp.setPassenger_id(rs.getInt("passenger_id"));
+   		tmp.setCar_id(rs.getInt("car_id"));
+	}
+
+
+   		return tmp;
+   }
+
+
+   // -1이면 운전자아이디가 아니라는것 ,
+	public int D_login(String driver_phone, String driver_name) throws Exception{
+
+		int tmp = -1;
+
+		conn = DBUtil.getConnect();
+		String sql = "SELECT * from DRIVER WHERE  DRIVER_PHONE= ? AND  DRIVER_NAME = ?";
+
+		st = conn.prepareStatement(sql);
+		st.setString(1,driver_phone);
+		st.setString(2,driver_name);
+		rs = st.executeQuery();
+
+		if(rs.next()){
+			tmp = rs.getInt("driver_id");
+		}
+
+		return tmp;
+
+	}
 }
