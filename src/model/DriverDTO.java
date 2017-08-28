@@ -15,6 +15,23 @@ public class DriverDTO {
 	public DriverDTO() {
 		super();
 	}
+	
+	
+	
+	public DriverDTO(String driver_name, String drver_phone, String driver_gender, String licence_num, int range,
+			String current_pos, int drive_possible) {
+		super();
+		this.driver_name = driver_name;
+		this.drver_phone = drver_phone;
+		this.driver_gender = driver_gender;
+		this.licence_num = licence_num;
+		this.range = range;
+		this.current_pos = current_pos;
+		this.drive_possible = drive_possible;
+	}
+
+
+
 	public DriverDTO(int driver_id, String driver_name, String drver_phone, String driver_gender, String licence_num,
 			int range, String current_pos, int drive_possible, int passenger_id, int car_id) {
 		super();
