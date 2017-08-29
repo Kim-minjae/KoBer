@@ -8,17 +8,18 @@ import model.DriverDTO;
 
 public class DriverController {
 
-	 public void DriverRegisterService() throws Exception{
-	//public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+	
+	String driver_name, driver_phone, driver_gender, licence_num = null;
+	String current_pos = null;
+	DriverDAO dao = new DriverDAO();
+	DriverDTO dto = null;
+	int driver_possible;
+	int result = 0;
+	int range = 0;
+	Scanner sc = new Scanner(System.in);
 
-		String driver_name, driver_phone, driver_gender, licence_num = null;
-		String current_pos = null;
-		DriverDAO dao = new DriverDAO();
-		DriverDTO dto = null;
-		int driver_possible;
-		int result = 0;
-		int range = 0;
+	public void DriverRegisterService() throws Exception{
+	//public static void main(String[] args) {
 
 		System.out.println("─────────운전자 정보 등록창입니다.─────────");
 		System.out.println("─────────────────────────────────");
@@ -116,6 +117,50 @@ public class DriverController {
 
 		}
 
+	}//register
+	 
+	 //driver possible
+	 public void driver_possible() throws Exception{
+		 ploop: while (true) {
+			int dId = dao.D_login(driver_phone, driver_name);
+			System.out.println("운전 가능하십니까 ? (Y/N)");
+			String yOrN = sc.nextLine();
+
+			if (yOrN.equalsIgnoreCase("y")) {
+				dao.possibleToggle(1, dId);
+				System.out.println("운행 가능(ON)");
+				break ploop;
+			} else if (yOrN.equalsIgnoreCase("n")) {
+				dao.possibleToggle(0, dId);
+				System.out.println("운행 불가(OFF)");
+				break ploop;
+			}else{
+				System.out.println("잘못 입력 하셨습니다.");
+			}
+		}
 	}
+	 
+	 //driver possible
+	 public void range_change() throws Exception{
+		 ploop: while (true) {
+			int dId = dao.D_login(driver_phone, driver_name);
+			System.out.println("범위를 수정하시겠습니까 ? (Y/N)");
+			String yOrN = sc.nextLine();
+			
+			if (yOrN.equalsIgnoreCase("y")) {
+				System.out.print("변경할 범위를 입력하세요> ");
+				int inputrange = sc.nextInt();
+				dao.changeRange(inputrange, dId);
+				System.out.println(inputrange +"로 범위 변경 완료");
+				break ploop;
+			} else if (yOrN.equalsIgnoreCase("n")) { 
+				System.out.println("변경 취소");
+				break ploop;
+			}else{
+				System.out.println("잘못 입력 하셨습니다.");
+			}
+		}
+	}
+	 
 
 }
