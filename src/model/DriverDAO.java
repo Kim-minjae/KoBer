@@ -26,7 +26,7 @@ public class DriverDAO {
     	 return dId;
     }
     
-    
+
    public int driverInsert(DriverDTO dto){
  		String sql="insert into Driver(driver_id, driver_name, driver_phone, driver_gender,licence_num, range, current_pos, d_possible) values (driver_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
  		conn = DBUtil.getConnect();

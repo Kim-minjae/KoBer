@@ -59,4 +59,19 @@ public class CarDAO {
 		}
 		return count;
 	}
+	
+	
+    public int loadCarId() throws SQLException{
+    	int cId = 0;
+    	conn = DBUtil.getConnect();
+    	String sql = "select max(car_id) from car";
+		st = conn.prepareStatement(sql);
+		rs = st.executeQuery();
+		while (rs.next()) {
+			cId = rs.getInt("max(car_id)");
+		}
+    	 return cId;
+    }
+    
+    
 }
