@@ -1,6 +1,7 @@
 package controller;
 
 import model.DriverDAO;
+import model.DriverDTO;
 import model.PassengerDAO;
 
 import java.io.BufferedReader;
@@ -45,8 +46,13 @@ public class MainController {
 
                         switch(switcher){
                             case 1 :
-                                //DriverService driverService = new DriverService()
-                                //driverService.createDriverAccount();
+							try {
+								DriverController driverService = new DriverController();
+								driverService.DriverRegisterService();
+								driverService.carInfoUpdate(); 
+							} catch (Exception e1) { 
+								e1.printStackTrace();
+							}
                                 continue Loop1;
                             case 2 :
                                 //PassengerService passengerService = new PassengerService()
@@ -57,7 +63,7 @@ public class MainController {
                         break Loop1;
                     case "2" :
                         //로그인 호출
-                        System.out.println(" 전화번호와 이름을 순서대로 입력해주세요 : <ex) 010-1111-2222,홍길동>");
+                        System.out.println(" 전화번호와 이름을 순서대로 입력해주세요 : <ex) 01011112222 홍길동>");
                         st = new StringTokenizer(br.readLine());
 
                         String phone_num_tmp = st.nextToken();
@@ -85,9 +91,9 @@ public class MainController {
                                 if(passenger_id == -1){
                                     System.out.println("운전자 계정으로 로그인하셨습니다. ");
                                     //운전자 id를 불러오고 운전자 서비스를 시작함.
-                                    //
-                                    // DriverDTO driverDTO = DriverService.getDriver(driver_id)
-                                    // DriverService.main(driverDTO)
+                                    System.out.println(driver_id);
+                                      DriverDTO driverDTO = driverDAO.getDriver(driver_id);
+                                      DriverController.menu(driverDTO);
                                 }else {
                                     System.out.println("탑승자/운전자 계정중 어느 계정으로 서비스를 시작하시겠습니까? ");
                                     st = new StringTokenizer(br.readLine());

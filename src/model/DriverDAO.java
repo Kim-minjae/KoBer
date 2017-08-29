@@ -67,9 +67,10 @@ public class DriverDAO {
 	   String sql="update driver set car_id=? where driver_id=?";		
 		conn = DBUtil.getConnect();
 		try {
+			int tempid = loadDriverId(conn);
 			st = conn.prepareStatement(sql);
 			st.setInt(1,carID);
-			st.setInt(2, dto.getDriver_id());
+			st.setInt(2, tempid);
 			count = st.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,7 +145,7 @@ public class DriverDAO {
    	rs = st.executeQuery();
 
    	if(rs.next()){
-   		tmp.setCar_id(driver_id);
+   		tmp.setDriver_id(rs.getInt("driver_id"));
    		tmp.setDrver_phone(rs.getString("driver_phone"));
    		tmp.setDriver_name(rs.getString("driver_name"));
    		tmp.setDriver_gender(rs.getString("driver_gender"));

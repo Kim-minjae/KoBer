@@ -1,6 +1,8 @@
 package model;
 
-public class CarDTO {
+import java.io.Serializable;
+
+public class CarDTO implements Serializable{
 	int car_id;
 	String car_type;
 	int capacity;

@@ -1,6 +1,8 @@
 package model;
 
-public class DriverDTO {
+import java.io.Serializable;
+
+public class DriverDTO implements Serializable {
 	int driver_id;
 	String driver_name;
 	String drver_phone;
