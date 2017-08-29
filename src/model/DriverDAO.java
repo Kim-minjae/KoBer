@@ -16,15 +16,16 @@ public class DriverDAO {
    //insert
     
     public int loadDriverId(Connection conn) throws SQLException{
-    	int pid = 0;
+    	int dId = 0;
     	String sql = "select max(driver_id) from Driver";
 		st = conn.prepareStatement(sql);
 		rs = st.executeQuery();
 		while (rs.next()) {
-			pid = rs.getInt("max(driver_id)");
+			dId = rs.getInt("max(driver_id)");
 		}
-    	 return pid;
+    	 return dId;
     }
+    
     
    public int driverInsert(DriverDTO dto){
  		String sql="insert into Driver(driver_id, driver_name, driver_phone, driver_gender,licence_num, range, current_pos, d_possible) values (driver_seq.NEXTVAL,?,?,?,?,?,?,?)";  		
@@ -77,6 +78,8 @@ public class DriverDAO {
 		}
 		return count;		
    }
+ 
+   
    public int car_CapacityUpdate(DriverDTO dto,int capacity){	    //차 ID에 따른 capacity 설정
 	   String sql="update car set capacity=? where car_id=?";			
  		conn = DBUtil.getConnect();
@@ -95,6 +98,38 @@ public class DriverDAO {
  		return count;
    }
 
+   public int possibleToggle(int d_possible,int driver_id){ //드라이버가 운전가능여부
+	   String sql="update driver set d_possible=? where driver_id=?";		
+		conn = DBUtil.getConnect();
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1,d_possible);
+			st.setInt(2, driver_id);
+			count = st.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, st, rs);
+		}
+		return count;		
+   }
+   
+   public int changeRange(int range,int driver_id){ //드라이버가 운전범위 변경
+	   String sql="update driver set range=? where driver_id=?";		
+		conn = DBUtil.getConnect();
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1,range);
+			st.setInt(2, driver_id);
+			count = st.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, st, rs);
+		}
+		return count;		
+   }
+   
    public DriverDTO getDriver(int driver_id)throws SQLException{
 
    	conn = DBUtil.getConnect();
