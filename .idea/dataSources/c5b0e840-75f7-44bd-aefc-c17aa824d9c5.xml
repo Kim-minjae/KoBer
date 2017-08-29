@@ -64,270 +64,357 @@
     </schema>
     <schema id="22" parent="1" name="KOBER">
       <ObjectId>52</ObjectId>
-      <IntrospectionTimestamp>2017-08-25.09:52:24</IntrospectionTimestamp>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+      <IntrospectionTimestamp>2017-08-28.15:49:30</IntrospectionTimestamp>
+      <CreatedTimestamp>2017-08-28.11:06:09</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:49:26</ModifiedTimestamp>
+      <CommentsHash>103974512489959</CommentsHash>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <table id="23" parent="22" name="CAR">
-      <ObjectId>20609</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <sequence id="23" parent="22" name="DRIVER_SEQ">
+      <ObjectId>20711</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:39:22</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:39:22</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="24" parent="22" name="LOG_SEQ">
+      <ObjectId>20701</ObjectId>
+      <CreatedTimestamp>2017-08-28.11:06:09</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.11:06:09</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <sequence id="25" parent="22" name="PASSENGER_SEQ">
+      <ObjectId>20710</ObjectId>
+      <CreatedTimestamp>2017-08-28.14:04:26</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.14:04:26</ModifiedTimestamp>
+      <SequenceIdentity>1</SequenceIdentity>
+    </sequence>
+    <table id="26" parent="22" name="CAR">
+      <ObjectId>20733</ObjectId>
+      <Comment>차</Comment>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="24" parent="22" name="DRIVER">
-      <ObjectId>20605</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <table id="27" parent="22" name="DRIVER">
+      <ObjectId>20729</ObjectId>
+      <Comment>운전자</Comment>
+      <CreatedTimestamp>2017-08-28.15:48:36</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="25" parent="22" name="PASSENGER">
-      <ObjectId>20607</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <table id="28" parent="22" name="LOG">
+      <ObjectId>20741</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:49:26</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:49:26</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="26" parent="22" name="PAYMENT_CAR">
-      <ObjectId>20613</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <table id="29" parent="22" name="PASSENGER">
+      <ObjectId>20731</ObjectId>
+      <Comment>탑승자</Comment>
+      <CreatedTimestamp>2017-08-28.15:48:36</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <table id="27" parent="22" name="REQUIREMENT">
-      <ObjectId>20611</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <table id="30" parent="22" name="PAYMENT_CAR">
+      <ObjectId>20737</ObjectId>
+      <Comment>차종당 요</Comment>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TemporaryPreserve>1</TemporaryPreserve>
     </table>
-    <column id="28" parent="23" name="CAR_ID">
+    <table id="31" parent="22" name="REQUIREMENT">
+      <ObjectId>20735</ObjectId>
+      <Comment>요구사항</Comment>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
+      <TemporaryPreserve>1</TemporaryPreserve>
+    </table>
+    <column id="32" parent="26" name="CAR_ID">
       <Position>1</Position>
+      <Comment>차 ID</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="23" name="CAPACITY">
+    <column id="33" parent="26" name="CAPACITY">
       <Position>2</Position>
+      <Comment>차 수용인원</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="23" name="CAR_TYPE">
+    <column id="34" parent="26" name="CAR_TYPE">
       <Position>3</Position>
+      <Comment>차종</Comment>
       <DataType>VARCHAR2(6)|0</DataType>
     </column>
-    <index id="31" parent="23" name="PK_CAR">
-      <ObjectId>20610</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <index id="35" parent="26" name="PK_CAR">
+      <ObjectId>20734</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TablespaceName>SYSTEM</TablespaceName>
       <ColNames>CAR_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="32" parent="23" name="PK_CAR">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <key id="36" parent="26" name="PK_CAR">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>CAR_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_CAR</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="33" parent="23" name="FK_PAYMENT_CAR_TO_CAR">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <foreign-key id="37" parent="26" name="FK_PAYMENT_CAR_TO_CAR">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>CAR_TYPE</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefTableName>PAYMENT_CAR</RefTableName>
       <RefKeyName>PK_PAYMENT_CAR</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="34" parent="24" name="DRIVER_ID">
+    <column id="38" parent="27" name="DRIVER_ID">
       <Position>1</Position>
+      <Comment>운전자 ID</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="35" parent="24" name="DRIVER_NAME">
+    <column id="39" parent="27" name="DRIVER_NAME">
       <Position>2</Position>
+      <Comment>운전자 이름</Comment>
       <DataType>VARCHAR2(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="36" parent="24" name="DRIVER_PHONE">
+    <column id="40" parent="27" name="DRIVER_PHONE">
       <Position>3</Position>
+      <Comment>운전자 전화번호</Comment>
       <DataType>VARCHAR2(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="37" parent="24" name="DRIVER_GENDER">
+    <column id="41" parent="27" name="DRIVER_GENDER">
       <Position>4</Position>
+      <Comment>운전자 성별</Comment>
       <DataType>CHAR(2)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="38" parent="24" name="LICENCE_NUM">
+    <column id="42" parent="27" name="LICENCE_NUM">
       <Position>5</Position>
+      <Comment>면허등록번호</Comment>
       <DataType>VARCHAR2(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="24" name="RANGE">
+    <column id="43" parent="27" name="RANGE">
       <Position>6</Position>
+      <Comment>가용 범위</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="40" parent="24" name="CURRENT_POS">
+    <column id="44" parent="27" name="CURRENT_POS">
       <Position>7</Position>
+      <Comment>드라이버 현재위치</Comment>
       <DataType>VARCHAR2(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="24" name="CURRENT_TIME">
+    <column id="45" parent="27" name="D_POSSIBLE">
       <Position>8</Position>
-      <DataType>DATE|0</DataType>
+      <Comment>현재 운전 가능 여부</Comment>
+      <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="42" parent="24" name="D_POSSIBLE">
+    <column id="46" parent="27" name="PASSENGER_ID">
       <Position>9</Position>
-      <DataType>VARCHAR2(5)|0</DataType>
-      <NotNull>1</NotNull>
+      <Comment>탑승자 ID</Comment>
+      <DataType>NUMBER(*)|0</DataType>
     </column>
-    <column id="43" parent="24" name="PASSENGER_ID">
+    <column id="47" parent="27" name="CAR_ID">
       <Position>10</Position>
+      <Comment>차 ID</Comment>
       <DataType>NUMBER(*)|0</DataType>
     </column>
-    <column id="44" parent="24" name="CAR_ID">
-      <Position>11</Position>
-      <DataType>NUMBER(*)|0</DataType>
-    </column>
-    <index id="45" parent="24" name="PK_DRIVER">
-      <ObjectId>20606</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <index id="48" parent="27" name="PK_DRIVER">
+      <ObjectId>20730</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:48:36</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:36</ModifiedTimestamp>
       <TablespaceName>SYSTEM</TablespaceName>
       <ColNames>DRIVER_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="46" parent="24" name="PK_DRIVER">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <key id="49" parent="27" name="PK_DRIVER">
+      <ModifiedTimestamp>2017-08-28.15:48:36</ModifiedTimestamp>
       <ColNames>DRIVER_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_DRIVER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="47" parent="24" name="FK_PASSENGER_TO_DRIVER">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <foreign-key id="50" parent="27" name="FK_PASSENGER_TO_DRIVER">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>PASSENGER_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefTableName>PASSENGER</RefTableName>
       <RefKeyName>PK_PASSENGER</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <foreign-key id="48" parent="24" name="FK_CAR_TO_DRIVER">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <foreign-key id="51" parent="27" name="FK_CAR_TO_DRIVER">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>CAR_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefTableName>CAR</RefTableName>
       <RefKeyName>PK_CAR</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="49" parent="25" name="PASSENGER_ID">
+    <column id="52" parent="28" name="LOG_ID">
       <Position>1</Position>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="50" parent="25" name="PASSENGER_NAME">
+    <column id="53" parent="28" name="LOG_USER">
       <Position>2</Position>
+      <DataType>NUMBER(*)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="28" name="LOG_ACTION">
+      <Position>3</Position>
       <DataType>VARCHAR2(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="51" parent="25" name="PASSENGER_PHONE">
+    <column id="55" parent="28" name="LOG_TIME">
+      <Position>4</Position>
+      <DataType>DATE|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="56" parent="28" name="SYS_C007371">
+      <ObjectId>20742</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2017-08-28.15:49:26</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:49:26</ModifiedTimestamp>
+      <TablespaceName>SYSTEM</TablespaceName>
+      <ColNames>LOG_ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="28" name="SYS_C007371">
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2017-08-28.15:49:26</ModifiedTimestamp>
+      <ColNames>LOG_ID</ColNames>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <UnderlyingIndexName>SYS_C007371</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="58" parent="29" name="PASSENGER_ID">
+      <Position>1</Position>
+      <Comment>탑승자 ID</Comment>
+      <DataType>NUMBER(*)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="29" name="PASSENGER_NAME">
+      <Position>2</Position>
+      <Comment>탑승자 이름</Comment>
+      <DataType>VARCHAR2(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="29" name="PASSENGER_PHONE">
       <Position>3</Position>
+      <Comment>탑승자 휴대전화</Comment>
       <DataType>VARCHAR2(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="52" parent="25" name="PASSENGER_GENDER">
+    <column id="61" parent="29" name="PASSENGER_GENDER">
       <Position>4</Position>
+      <Comment>탑승자 성별</Comment>
       <DataType>CHAR(2)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="53" parent="25" name="ASSET">
+    <column id="62" parent="29" name="ASSET">
       <Position>5</Position>
+      <Comment>탑승자 자산</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="54" parent="25" name="REQUIREMENT_ID">
+    <column id="63" parent="29" name="REQUIREMENT_ID">
       <Position>6</Position>
+      <Comment>요구사항 id</Comment>
       <DataType>NUMBER(*)|0</DataType>
     </column>
-    <index id="55" parent="25" name="PK_PASSENGER">
-      <ObjectId>20608</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <index id="64" parent="29" name="PK_PASSENGER">
+      <ObjectId>20732</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TablespaceName>SYSTEM</TablespaceName>
       <ColNames>PASSENGER_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="56" parent="25" name="PK_PASSENGER">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <key id="65" parent="29" name="PK_PASSENGER">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>PASSENGER_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PASSENGER</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="57" parent="25" name="FK_REQUIREMENT_TO_PASSENGER">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <foreign-key id="66" parent="29" name="FK_REQUIREMENT_TO_PASSENGER">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>REQUIREMENT_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <RefTableName>REQUIREMENT</RefTableName>
       <RefKeyName>PK_REQUIREMENT</RefKeyName>
       <OnDelete>restrict</OnDelete>
     </foreign-key>
-    <column id="58" parent="26" name="CAR_TYPE">
+    <column id="67" parent="30" name="CAR_TYPE">
       <Position>1</Position>
+      <Comment>차종</Comment>
       <DataType>VARCHAR2(6)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="59" parent="26" name="PRICE">
+    <column id="68" parent="30" name="PRICE">
       <Position>2</Position>
+      <Comment>금액</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="60" parent="26" name="PK_PAYMENT_CAR">
-      <ObjectId>20614</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <index id="69" parent="30" name="PK_PAYMENT_CAR">
+      <ObjectId>20738</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TablespaceName>SYSTEM</TablespaceName>
       <ColNames>CAR_TYPE</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="61" parent="26" name="PK_PAYMENT_CAR">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <key id="70" parent="30" name="PK_PAYMENT_CAR">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>CAR_TYPE</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_PAYMENT_CAR</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="62" parent="27" name="REQUIREMENT_ID">
+    <column id="71" parent="31" name="REQUIREMENT_ID">
       <Position>1</Position>
+      <Comment>요구사항 id</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="63" parent="27" name="START_POINT">
+    <column id="72" parent="31" name="START_POINT">
       <Position>2</Position>
+      <Comment>출발지</Comment>
       <DataType>VARCHAR2(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="64" parent="27" name="DESTINATION">
+    <column id="73" parent="31" name="DESTINATION">
       <Position>3</Position>
+      <Comment>목적지</Comment>
       <DataType>VARCHAR2(10)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="65" parent="27" name="FELLOW_NUM">
+    <column id="74" parent="31" name="FELLOW_NUM">
       <Position>4</Position>
+      <Comment>동승자 수</Comment>
       <DataType>NUMBER(*)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="66" parent="27" name="PK_REQUIREMENT">
-      <ObjectId>20612</ObjectId>
-      <CreatedTimestamp>2017-08-25.09:51:19</CreatedTimestamp>
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <index id="75" parent="31" name="PK_REQUIREMENT">
+      <ObjectId>20736</ObjectId>
+      <CreatedTimestamp>2017-08-28.15:48:37</CreatedTimestamp>
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <TablespaceName>SYSTEM</TablespaceName>
       <ColNames>REQUIREMENT_ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="67" parent="27" name="PK_REQUIREMENT">
-      <ModifiedTimestamp>2017-08-25.09:51:19</ModifiedTimestamp>
+    <key id="76" parent="31" name="PK_REQUIREMENT">
+      <ModifiedTimestamp>2017-08-28.15:48:37</ModifiedTimestamp>
       <ColNames>REQUIREMENT_ID</ColNames>
       <InitiallyDeferred>1</InitiallyDeferred>
       <UnderlyingIndexName>PK_REQUIREMENT</UnderlyingIndexName>
