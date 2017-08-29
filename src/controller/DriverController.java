@@ -8,8 +8,8 @@ import model.DriverDTO;
 
 public class DriverController {
 
-	// public void DriverRegisterService() throws Exception{
-	public static void main(String[] args) {
+	 public void DriverRegisterService() throws Exception{
+	//public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
 		String driver_name, driver_phone, driver_gender, licence_num = null;

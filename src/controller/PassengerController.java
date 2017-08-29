@@ -11,8 +11,9 @@ import model.PassengerDTO;
 /**
  * Created by pose2 on 2017-08-24.
  */
-public class PassengerController {	
-    public static void main(String[] args) throws IOException {
+public class PassengerController {
+	public void passengerService() throws IOException{
+    //public static void main(String[] args) throws IOException {
     	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));		
     	PassengerDTO dto=null;
     	PassengerDAO dao=new PassengerDAO();

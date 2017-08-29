@@ -9,8 +9,8 @@ import model.RequirementDAO;
 import model.RequirementDTO;
 
 public class RequirementController {
-	// public void RequirementService() throws Exception {
-	public static void main(String[] args) throws Exception {
+	 public void RequirementService() throws Exception {
+	//public static void main(String[] args) throws Exception {
 
 		Scanner sc = new Scanner(System.in);
 		String start_point, destination = null;

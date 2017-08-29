@@ -7,8 +7,8 @@ import model.CarDTO;
 
 public class CarController {
 
-//	public void CarRegisterService() throws Exception {
-	 public static void main(String[] args) throws Exception{
+	public void CarRegisterService() throws Exception {
+//	 public static void main(String[] args) throws Exception{
 
 		Scanner sc = new Scanner(System.in);
 		String car_type = null;

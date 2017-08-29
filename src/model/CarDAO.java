@@ -44,7 +44,7 @@ public class CarDAO {
 	
 	// insert
 	public int carInsert(CarDTO dto) {
-		String sql = "insert into CAR values (car_seq.nextval,?,?)";
+		String sql = "insert into CAR (car_id, car_type, capacity) values (car_seq.nextval,?,?)";
 		conn = DBUtil.getConnect();
 		try {
 			st = conn.prepareStatement(sql);
