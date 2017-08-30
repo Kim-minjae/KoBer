@@ -3,6 +3,7 @@ package controller;
 import model.DriverDAO;
 import model.DriverDTO;
 import model.PassengerDAO;
+import model.PassengerDTO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class MainController {
 		DriverDAO driverDAO = new DriverDAO();
 		PassengerDAO passengerDAO = new PassengerDAO();
 		DriverController dc = new DriverController();
+		PassengerController psc=new PassengerController();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		boolean session = true;
@@ -55,15 +57,15 @@ public class MainController {
 						}
 						continue Loop1;
 					case 2:
-						// PassengerService passengerService = new
-						// PassengerService()
-						// passengerSerice.createPassengerAccount();
+						//회원가입 절차 
+						 PassengerController passengerService = new PassengerController();
+						 passengerService.passengerInsertService();
 					}
 
 					break Loop1;
 				case "2":
 					// 로그인 호출
-					System.out.println(" 전화번호와 이름을 순서대로 입력해주세요 : <ex) 01011112222 홍길동>");
+					System.out.println("전화번호와 이름을 순서대로 입력해주세요 : <ex) 01011112222 홍길동>");
 					st = new StringTokenizer(br.readLine());
 
 					String phone_num_tmp = st.nextToken();
@@ -82,10 +84,9 @@ public class MainController {
 								continue Loop1;
 							} else {
 								System.out.println("탑승자 계정으로 로그인하셨습니다. ");
-								// 탑승자 id를 불러오고 탑승자 서비스를 시작함
-								// PassengerDTO passengerDTO =
-								// PassengerService.getPassenger(passenger_id)
-								// PassengerService.main(PassengerDTO)
+								PassengerDTO passengerDTO =passengerDAO.getPassenger(passenger_id);
+								psc.passenger_menu(passengerDTO, passenger_id);
+							
 							}
 						} else {
 							if (passenger_id == -1) {
@@ -100,10 +101,8 @@ public class MainController {
 								Loop2: switch (st.nextToken()) {
 								case "1":
 									System.out.println("탑승자 계정으로 로그인하셨습니다. ");
-									// 탑승자 id를 불러오고 탑승자 서비스를 시작함
-									// PassengerDTO passengerDTO =
-									// PassengerService.getPassenger(passenger_id)
-									// PassengerService.main(PassengerDTO)
+									PassengerDTO passengerDTO =passengerDAO.getPassenger(passenger_id);
+									psc.passenger_menu(passengerDTO, passenger_id);
 
 									break Loop1;
 								case "2":

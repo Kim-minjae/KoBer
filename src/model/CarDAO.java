@@ -73,5 +73,25 @@ public class CarDAO {
     	 return cId;
     }
     
-    
+    public int getCapacitybyId(int c_id) {
+		int temp=0;
+		conn = DBUtil.getConnect();
+		String sql = "select capacity from car where car_id=?";
+
+		try {
+			st = conn.prepareStatement(sql);
+			st.setInt(1, c_id);
+			rs = st.executeQuery();
+		     if(rs.next()){
+		            temp = rs.getInt("capacity");
+		        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, st, rs);
+		}
+
+		return temp;
+	}
+	
 }

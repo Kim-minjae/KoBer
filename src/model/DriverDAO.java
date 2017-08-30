@@ -15,6 +15,7 @@ public class DriverDAO {
     int count;
    //insert
     
+    
     public int loadDriverId(Connection conn) throws SQLException{
     	int dId = 0;
     	String sql = "select max(driver_id) from Driver";
@@ -63,6 +64,9 @@ public class DriverDAO {
  		}
  		return count;		
  	}
+   
+   
+   
    public int setCarID(DriverDTO dto,int carID){ //드라이버가 자동차 설정
 	   String sql="update driver set car_id=? where driver_id=?";		
 		conn = DBUtil.getConnect();
