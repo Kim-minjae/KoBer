@@ -3,6 +3,8 @@ package network;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collections;
@@ -67,34 +69,37 @@ public class TcpIpServer {
 	} 
 	class ServerReceiver extends Thread {
 		Socket socket;
-		DataInputStream in;
-		DataOutputStream out;
+		ObjectInputStream ois;
+		ObjectOutputStream oos;
 
 		ServerReceiver(Socket socket) {
 			this.socket = socket;
 			try {
-				in  = new DataInputStream(socket.getInputStream());
-				out = new DataOutputStream(socket.getOutputStream());
+				ois  = new ObjectInputStream(socket.getInputStream()); 
+				oos = new ObjectOutputStream(socket.getOutputStream());
 			} catch(IOException e) {}
 		}
 
 		public void run() {
-			String name = "";
+			Object id = null;
 			try {
-				name = in.readUTF();
-				sendToAll("#"+name+"님이 들어오셨습니다.");
+				id = ois.readObject();
+				sendToAll("#"+id+"님이 들어오셨습니다.");
 
-				clients.put(name, out);
+				clients.put(id, oos);
 				System.out.println("현재 서버접속자 수는 "+ clients.size()+"입니다.");
 
-				while(in!=null) {
-					sendToAll(in.readUTF());
+				while(ois!=null) {
+					sendToAll(ois.readUTF());
 				}
 			} catch(IOException e) {
 				// ignore
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			} finally {
-				sendToAll("#"+name+"님이 나가셨습니다.");
-				clients.remove(name);
+				sendToAll("#"+id+"님이 나가셨습니다.");
+				clients.remove(id);
 				System.out.println("["+socket.getInetAddress() +":"+socket.getPort()+"]"+"에서 접속을 종료하였습니다.");
 				System.out.println("현재 서버접속자 수는 "+ clients.size()+"입니다.");
 			} // try

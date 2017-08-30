@@ -138,14 +138,14 @@ public class DriverController {
 	}
 
 	// driver possible
-	public void driver_possible() throws Exception {
+	public void driver_possible(int dId) throws Exception {
 		ploop: while (true) {
-			int dId = dao.D_login(driver_phone, driver_name);
 			System.out.println("운전 가능하십니까 ? (Y/N)");
 			String yOrN = sc.nextLine();
 
 			if (yOrN.equalsIgnoreCase("y")) {
 				dao.possibleToggle(1, dId);
+				System.out.println(dId);
 				System.out.println("운행 가능(ON)");
 				break ploop;
 			} else if (yOrN.equalsIgnoreCase("n")) {
@@ -159,9 +159,8 @@ public class DriverController {
 	}
 
 	// driver possible
-	public void range_change() throws Exception {
+	public void range_change(int dId) throws Exception {
 		ploop: while (true) {
-			int dId = dao.D_login(driver_phone, driver_name);
 			System.out.println("범위를 수정하시겠습니까 ? (Y/N)");
 			String yOrN = sc.nextLine();
 
@@ -180,18 +179,17 @@ public class DriverController {
 		}
 	}
 
-	public static void menu(DriverDTO driverDTO) {
+	public void menu(DriverDTO driverDTO, int dId) {
 		while (true) {
-			int choice = 0;
+			System.out.println("====== 운전자 메뉴창입니다. 메뉴를 선택하세요 ======");
+			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경 > 4.종료 ");
+			int choice = sc.nextInt();
 			DriverController dc = new DriverController();
-
-			System.out.println("=== 운전자 메뉴창입니다. 메뉴를 선택하세요 ===");
-			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경 > ");
 
 			switch (choice) {
 			case 1:
 				try {
-					dc.driver_possible();
+					dc.driver_possible(dId);
 					break;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -199,7 +197,7 @@ public class DriverController {
 				}
 			case 2:
 				try {
-					dc.range_change();
+					dc.range_change(dId);
 					break;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -214,8 +212,11 @@ public class DriverController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			case 0:
+				System.out.println("시스템 종료");
+				System.exit(0);
+				break;
 			default:
-
 			}
 		}
 

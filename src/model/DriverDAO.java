@@ -100,23 +100,24 @@ public class DriverDAO {
    }
 
    public int possibleToggle(int d_possible,int driver_id){ //드라이버가 운전가능여부
-	   String sql="update driver set d_possible=? where driver_id=?";		
+	   String sql="update driver set d_possible= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
 			st = conn.prepareStatement(sql);
 			st.setInt(1,d_possible);
 			st.setInt(2, driver_id);
-			count = st.executeUpdate(); 
+			count = st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbClose(conn, st, rs);
 		}
+		
 		return count;		
    }
    
    public int changeRange(int range,int driver_id){ //드라이버가 운전범위 변경
-	   String sql="update driver set range=? where driver_id=?";		
+	   String sql="update driver set range= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
 			st = conn.prepareStatement(sql);
@@ -137,7 +138,7 @@ public class DriverDAO {
 
    	String sql = "SELECT * from DRIVER WHERE DRIVER_ID = ?";
 
-   	DriverDTO tmp = null;
+   	DriverDTO tmp = new DriverDTO();
 
    	st = conn.prepareStatement(sql);
    	st.setInt(1,driver_id);
@@ -151,7 +152,7 @@ public class DriverDAO {
    		tmp.setDriver_gender(rs.getString("driver_gender"));
    		tmp.setLicence_num(rs.getString("licence_num"));
    		tmp.setRange(rs.getInt("range"));
-   		tmp.setCurrent_pos(rs.getString("currnet_pos"));
+   		tmp.setCurrent_pos(rs.getString("current_pos"));
    		tmp.setDrive_possible(rs.getInt("d_possible"));
    		tmp.setPassenger_id(rs.getInt("passenger_id"));
    		tmp.setCar_id(rs.getInt("car_id"));
