@@ -122,20 +122,27 @@ public class RequirementDAO {
 			
 			List<DriverDTO> slist2 = new ArrayList<>();
 			for(DriverDTO dto: slist){
+				//System.out.println("운전자 이름= "+dto.getDriver_name());
 				StringTokenizer st=new StringTokenizer(dto.current_pos,","); //운전자 현재위치
 				int tmp_x=Integer.parseInt(st.nextToken());
 				int tmp_y=Integer.parseInt(st.nextToken());
+				//System.out.println("운전자 현재위치= "+tmp_x+","+tmp_y);
 				
 				st=new StringTokenizer(requirementdto.getStart_point(), ","); //탑승자 현재위치
 				int start_x=Integer.parseInt(st.nextToken());
 				int start_y=Integer.parseInt(st.nextToken());
+				//System.out.println("탑승자 현재위치= "+start_x+","+start_y);
 				double calculresult=Math.sqrt(Math.pow(tmp_x-start_x, 2)+Math.pow(tmp_y-start_y, 2));
+				//System.out.println("운전자 현재위치-탑승자 현재위치= "+calculresult);
 			
 				st=new StringTokenizer(requirementdto.getDestination(), ","); //탑승자 끝위치
 				int dst_x=Integer.parseInt(st.nextToken());
 				int dst_y=Integer.parseInt(st.nextToken());
+				//System.out.println("탑승자 도착위치= "+dst_x+","+dst_y);
 				double calculresult2=Math.sqrt(Math.pow(dst_x-tmp_x, 2)+Math.pow(dst_y-tmp_y, 2));
-				
+				//System.out.println("운전자의 운행범위= "+dto.range);
+				//System.out.println("운전자 현재위치-탑승자 도착위치= "+calculresult2);
+				//System.out.println("=========================================================");
 				if((5.0-calculresult>=0) && dto.range-calculresult2>=0 ){
 					if(cdao.getCapacitybyId(dto.getCar_id())-(requirementdto.getFellow_num()+1)>=0){
 						slist2.add(dto);						
@@ -153,8 +160,9 @@ public class RequirementDAO {
 			String driver_name=rs.getString(2);
 			String driver_phone = rs.getString(3);
 			String driver_gender = rs.getString(4);
-			int carId=rs.getInt(10);
+			int range=rs.getInt(6);
 			String current_pos = rs.getString(7);
-			return new DriverDTO(driver_id, driver_name ,driver_phone, driver_gender, current_pos,carId);
+			int carId=rs.getInt(10);
+			return new DriverDTO(driver_id, driver_name ,driver_phone, driver_gender,range, current_pos,carId);
 		}
 }

@@ -98,13 +98,13 @@ public class MainController {
 								st = new StringTokenizer(br.readLine());
 
 								Loop2: switch (st.nextToken()) {
-								case "1":
+								case "탑승자":
 									System.out.println("탑승자 계정으로 로그인하셨습니다. ");
 									PassengerDTO passengerDTO =passengerDAO.getPassenger(passenger_id);
 									psc.passenger_menu(passengerDTO, passenger_id);
 
 									break Loop1;
-								case "2":
+								case "운전자":
 									System.out.println("운전자 계정으로 로그인하셨습니다. ");
 									// 운전자 id를 불러오고 운전자 서비스를 시작함.
 									DriverDTO driverDTO = driverDAO.getDriverByID(driver_id);
