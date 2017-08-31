@@ -145,7 +145,6 @@ public class DriverController {
 
 			if (yOrN.equalsIgnoreCase("y")) {
 				dao.possibleToggle(1, dId);
-				//System.out.println(dId);
 				System.out.println("운행 가능(ON)");
 				break ploop;
 			} else if (yOrN.equalsIgnoreCase("n")) {
@@ -168,7 +167,7 @@ public class DriverController {
 				System.out.print("변경할 범위를 입력하세요> ");
 				int inputrange = sc.nextInt();
 				dao.changeRange(inputrange, dId);
-				System.out.println(inputrange + "로 범위 변경 완료");
+				System.out.println(inputrange + " 으로 범위 변경 완료");
 				break ploop;
 			} else if (yOrN.equalsIgnoreCase("n")) {
 				System.out.println("변경 취소");
@@ -182,7 +181,7 @@ public class DriverController {
 	public void menu(DriverDTO driverDTO, int dId) {
 		while (true) {
 			System.out.println("====== 운전자 메뉴창입니다. 메뉴를 선택하세요 ======");
-			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경 > 0.종료 ");
+			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경  0.종료 ");
 			int choice = sc.nextInt();
 			DriverController dc = new DriverController();
 

@@ -31,7 +31,8 @@ public class MainController {
 			System.out.println("2.로그인 ");
 			System.out.println("3.어플리케이션 종료");
 			String tmp = br.readLine();
-			if (!tmp.equals("1") && !tmp.equals("2") && !tmp.equals("3")) {
+
+			if (!tmp.equals("1") && !tmp.equals("2")&& !tmp.equals("3")) {
 				continue Loop1;
 			} else {
 
@@ -61,9 +62,10 @@ public class MainController {
 						 PassengerController passengerService = new PassengerController();
 						 passengerService.passengerInsertService();
 						 continue Loop1;
+					default:
+						break Loop1;
 					}
 
-					break Loop1;
 				case "2":
 					// 로그인 호출
 					System.out.println("전화번호와 이름을 순서대로 입력해주세요 : <ex) 01011112222 홍길동>");
@@ -100,13 +102,13 @@ public class MainController {
 								st = new StringTokenizer(br.readLine());
 
 								Loop2: switch (st.nextToken()) {
-								case "1":
+								case "탑승자":
 									System.out.println("탑승자 계정으로 로그인하셨습니다. ");
 									PassengerDTO passengerDTO =passengerDAO.getPassenger(passenger_id);
 									psc.passenger_menu(passengerDTO, passenger_id);
 
 									break Loop1;
-								case "2":
+								case "운전자":
 									System.out.println("운전자 계정으로 로그인하셨습니다. ");
 									// 운전자 id를 불러오고 운전자 서비스를 시작함.
 									DriverDTO driverDTO = driverDAO.getDriver(driver_id);
@@ -125,7 +127,7 @@ public class MainController {
 					break Loop1;
 				case "3":
 					System.out.println("서비스를 종료합니다. -Bye-");
-					return;
+					System.exit(0);
 				default:
 					System.out.println("맞는 케이스가 없습니다.");
 					continue Loop1;

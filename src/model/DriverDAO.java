@@ -71,11 +71,15 @@ public class DriverDAO {
 	   String sql="update driver set car_id=? where driver_id=?";		
 		conn = DBUtil.getConnect();
 		try {
+			conn.setAutoCommit(false);
 			int tempid = loadDriverId(conn);
 			st = conn.prepareStatement(sql);
 			st.setInt(1,carID);
 			st.setInt(2, tempid);
-			count = st.executeUpdate(); 
+			count = st.executeUpdate();
+	        LogDTO ldto = new LogDTO(tempid,"운전자 차량 등록");
+	        LogAction.logInsert(conn, ldto);
+	        conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -89,12 +93,15 @@ public class DriverDAO {
 	   String sql="update car set capacity=? where car_id=?";			
  		conn = DBUtil.getConnect();
  		try {
+ 			conn.setAutoCommit(false);
  			st = conn.prepareStatement(sql);
  			
  			st.setInt(1, capacity);
     		st.setInt(2, dto.getCar_id());
  			count = st.executeUpdate();
- 			
+ 			LogDTO ldto = new LogDTO(dto.getCar_id(),"차량 수용인원 변경");
+	        LogAction.logInsert(conn, ldto);
+	        conn.commit();
  		} catch (SQLException e) {
  			e.printStackTrace();
  		} finally {
@@ -107,10 +114,14 @@ public class DriverDAO {
 	   String sql="update driver set d_possible= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
+			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 			st.setInt(1,d_possible);
 			st.setInt(2, driver_id);
 			count = st.executeUpdate();
+			LogDTO ldto = new LogDTO(driver_id,"운전 가능여부 변경");
+	        LogAction.logInsert(conn, ldto);
+	        conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -124,10 +135,14 @@ public class DriverDAO {
 	   String sql="update driver set range= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
+			conn.setAutoCommit(false);
 			st = conn.prepareStatement(sql);
 			st.setInt(1,range);
 			st.setInt(2, driver_id);
 			count = st.executeUpdate(); 
+			LogDTO ldto = new LogDTO(driver_id,"운전 가용범위 변경");
+	        LogAction.logInsert(conn, ldto);
+	        conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -143,12 +158,12 @@ public class DriverDAO {
    	String sql = "SELECT * from DRIVER WHERE DRIVER_ID = ?";
 
    	DriverDTO tmp = new DriverDTO();
-
    	st = conn.prepareStatement(sql);
    	st.setInt(1,driver_id);
 
    	rs = st.executeQuery();
-
+   	LogDTO ldto = new LogDTO(driver_id,"운전자 로그인");
+    LogAction.logInsert(conn, ldto);
    	if(rs.next()){
    		tmp.setDriver_id(rs.getInt("driver_id"));
    		tmp.setDrver_phone(rs.getString("driver_phone"));
@@ -183,7 +198,7 @@ public class DriverDAO {
 		if(rs.next()){
 			tmp = rs.getInt("driver_id");
 		}
-
+	
 		return tmp;
 
 	}

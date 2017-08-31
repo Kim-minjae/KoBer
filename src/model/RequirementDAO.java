@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +20,16 @@ public class RequirementDAO {
 
 	   public int loadReqId() throws SQLException{//최신 요구사항
 		   conn = DBUtil.getConnect();
+	    	int rId = 0;
+	    	String sql = "select max(requirement_id) from requirement";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				rId = rs.getInt("max(requirement_id)");
+			}
+	    	 return rId;
+	    }
+	   public int loadReqId2(Connection conn) throws SQLException{//최신 요구사항
 	    	int rId = 0;
 	    	String sql = "select max(requirement_id) from requirement";
 			pst = conn.prepareStatement(sql);
@@ -64,13 +73,18 @@ public class RequirementDAO {
 		String sql = "insert into REQUIREMENT values(require_seq.NEXTVAL,?,?,?)";
 
 		try {
+			conn.setAutoCommit(false);
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, rdto.getStart_point());
 			pst.setString(2, rdto.getDestination());
 			pst.setInt(3, rdto.getFellow_num());
 
 			count = pst.executeUpdate();
-
+			int tmpid = loadReqId2(conn);
+			LogDTO ldto = new LogDTO(tmpid, "요구사항 등록");//요구사항 등록로그
+			LogAction.logInsert(conn, ldto);
+			conn.commit();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

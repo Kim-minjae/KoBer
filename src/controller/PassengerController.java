@@ -175,8 +175,8 @@ public class PassengerController {
 				String passenger_name=dao.getPassenger_name(pID);		
 				if(protector_phone!=null)
 				{
-					System.out.println(passenger_name+"회원님이 "+driver_id+"번호 택시를 탑승하셨습니다." );
-				System.out.println(protector_phone+"번호 이 내용을 전송합니다.");
+					System.out.println(passenger_name+"회원님이 "+driver_id+"번 택시를 탑승하셨습니다." );
+				System.out.println(protector_phone+"번으로 이 내용을 전송합니다.");
 					//dao.transferLog(pID,protector_phone, passenger_name, driver_id);					
 				}
 				
