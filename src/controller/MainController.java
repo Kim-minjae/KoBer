@@ -30,7 +30,7 @@ public class MainController {
 			System.out.println("2.로그인 ");
 			System.out.println("3.어플리케이션 종료");
 			String tmp = br.readLine();
-			if (!tmp.equals("1") && !tmp.equals("2")) {
+			if (!tmp.equals("1") && !tmp.equals("2")&& !tmp.equals("3")) {
 				continue Loop1;
 			} else {
 
@@ -59,9 +59,11 @@ public class MainController {
 						//회원가입 절차 
 						 PassengerController passengerService = new PassengerController();
 						 passengerService.passengerInsertService();
+						 continue Loop1;
+					default:
+						break Loop1;
 					}
 
-					break Loop1;
 				case "2":
 					// 로그인 호출
 					System.out.println("전화번호와 이름을 순서대로 입력해주세요 : <ex) 01011112222 홍길동>");
@@ -125,7 +127,7 @@ public class MainController {
 					break Loop1;
 				case "3":
 					System.out.println("서비스를 종료합니다. -Bye-");
-					return;
+					System.exit(0);
 				default:
 					System.out.println("맞는 케이스가 없습니다.");
 					continue Loop1;
