@@ -92,7 +92,7 @@ public class MainController {
 							if (passenger_id == -1) {
 								System.out.println("운전자 계정으로 로그인하셨습니다. ");
 								// 운전자 id를 불러오고 운전자 서비스를 시작함.
-								DriverDTO driverDTO = driverDAO.getDriver(driver_id);
+								DriverDTO driverDTO = driverDAO.getDriverByID(driver_id);
 								dc.menu(driverDTO, driver_id);
 							} else {
 								System.out.println("탑승자/운전자 계정중 어느 계정으로 서비스를 시작하시겠습니까? ");
@@ -108,7 +108,7 @@ public class MainController {
 								case "2":
 									System.out.println("운전자 계정으로 로그인하셨습니다. ");
 									// 운전자 id를 불러오고 운전자 서비스를 시작함.
-									DriverDTO driverDTO = driverDAO.getDriver(driver_id);
+									DriverDTO driverDTO = driverDAO.getDriverByID(driver_id);
 									dc.menu(driverDTO, driver_id);
 									break Loop1;
 								default:
