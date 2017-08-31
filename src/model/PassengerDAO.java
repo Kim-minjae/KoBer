@@ -74,7 +74,29 @@ public class PassengerDAO {
         }
 
         return tmp;
+    }
 
-        
+    public PassengerDTO getPassengerByID(int passenger_id) throws SQLException{
+
+        PassengerDTO result = null;
+
+        conn = DBUtil.getConnect();
+        String sql = "SELECT * FROM PASSENGER WHERE PASSENGER_ID = ?";
+
+        pst = conn.prepareStatement(sql);
+        pst.setInt(1,passenger_id);
+        rs = pst.executeQuery();
+
+        if(rs.next()){
+            result.setPassenger_id(passenger_id);
+            result.setPassenger_name(rs.getString("passenger_name"));
+            result.setPassenger_phone(rs.getString("passenger_phone"));
+            result.setPassenger_gender(rs.getString("passenger_gender"));
+            result.setAsset(rs.getInt("asset"));
+            result.setRequirement_id(rs.getInt("requirement_id"));
+        }
+
+        return result;
+
     }
 }

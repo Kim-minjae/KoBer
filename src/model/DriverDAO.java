@@ -130,7 +130,7 @@ public class DriverDAO {
 		return count;		
    }
    
-   public DriverDTO getDriver(int driver_id)throws SQLException{
+   public DriverDTO getDriverByID(int driver_id)throws SQLException{
 
    	conn = DBUtil.getConnect();
 
