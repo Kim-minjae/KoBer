@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -120,7 +119,7 @@ public class RequirementDAO {
 	 public List<DriverDTO> showAvailableDriverList(RequirementDTO requirementdto){
 			List<DriverDTO> slist = new ArrayList<>();
 			CarDAO cdao=new CarDAO();
-			String sql="select * from driver where d_possible=1"; 
+			String sql="select * from driver where d_possible=1 order by driver_id"; 
 			conn = DBUtil.getConnect();
 			try {
 				pst = conn.prepareStatement(sql);
@@ -163,13 +162,9 @@ public class RequirementDAO {
 						slist2.add(dto);						
 					}
 				}
-			}
-			
-		
+			}	
 			return slist2;	
 		}
-	 
-	 
 	 private DriverDTO makeDriverList(ResultSet rs) throws SQLException {
 			int driver_id = rs.getInt(1);
 			String driver_name=rs.getString(2);

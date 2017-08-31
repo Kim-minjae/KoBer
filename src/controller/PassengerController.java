@@ -26,7 +26,7 @@ public class PassengerController {
 		// public static void main(String[] args) throws IOException {
 
 		int passenger_id = 0, asset = 0, requirement_id = 0;
-		String passenger_name = null, passenger_phone = null, passenger_gender = null;
+		String passenger_name = null, passenger_phone = null, passenger_gender = null, protector_phone;
 		int result2 = 0;
 		System.out.println("─────────탑승자 정보 등록창입니다.─────────");
 
@@ -81,7 +81,31 @@ public class PassengerController {
 				System.out.println("형식에 맞지 않습니다. 다시 입력하세요. ex) 5000");
 			}
 		}
-		dto = new PassengerDTO(0, passenger_name, passenger_phone, passenger_gender, asset, -1);
+		
+		System.out.println("보호자의 휴대전화를 등록하시겠습니까? (Y/N)");
+		System.out.println("승차시 보호자의 번호로 메세지가 전달됩니다.");
+		String yOrN = br.readLine();
+		Loop5: while (true) { // 휴대전화 입력 반복문
+			if(yOrN.equalsIgnoreCase("y")){
+				System.out.println("보호자의 휴대전화를 입력하세요.(특수문자 제외 입력): ");
+				protector_phone = br.readLine();
+				
+				String regExp = "(010|016|019|011)\\d{3,4}\\d{4}";
+				boolean result = Pattern.matches((regExp), protector_phone);
+				if (!result) {
+					System.out.println("형식에 맞지 않습니다. 다시 입력하세요.");
+					continue Loop5;
+				}else{
+					break;
+				}
+			}else if(yOrN.equalsIgnoreCase("n")){
+				protector_phone=null;
+				break;
+			}else{
+				System.out.println("잘못 입력 하셨습니다.");
+			}
+		}
+		dto = new PassengerDTO(0, passenger_name, passenger_phone, passenger_gender, asset, -1, protector_phone);
 		result2 = dao.createPassengerAccount(dto);
 
 		if (result2 > 0) {
@@ -127,7 +151,6 @@ public class PassengerController {
 					dao.setReqID(pID, rId);
 					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -145,7 +168,30 @@ public class PassengerController {
 				rdto=rdao.makeRdto(reqID);
 				driverlist=rdao.showAvailableDriverList(rdto);
 				DriverView.print(driverlist);	
-				System.out.println();
+				System.out.print("선택할 드라이버 ID를 입력해주세요: ");
+			    int driver_id=Integer.parseInt(br.readLine());
+			    
+				String protector_phone=dao.getProtector_phone(pID);
+				String passenger_name=dao.getPassenger_name(pID);		
+				if(protector_phone!=null)
+				{
+					System.out.println(passenger_name+"회원님이 "+driver_id+"번 택시를 탑승하셨습니다." );
+				System.out.println(protector_phone+"번으로 이 내용을 전송합니다.");
+					//dao.transferLog(pID,protector_phone, passenger_name, driver_id);					
+				}
+				
+				
+				/*
+				 * ID잘 썼는지,
+				 */
+				/*
+				 * 출력해주는 DAO
+				 */
+				
+				/*
+				 * 탑승자에게는 누구랑 매치되었다.
+				 * 
+				 */
 				break;
 			case 4:
 				System.out.println("시스템 종료");

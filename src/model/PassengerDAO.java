@@ -14,8 +14,9 @@ public class PassengerDAO {
 	ResultSet rs;
 	int count = 0;
 
-	public int setReqID(int passenger_id, int requirement_id) { // 탑승자가 요구사항 설정
-		String sql = "update passenger set requirement_id =? where passenger_id=?";
+
+	public int setReqID(int passenger_id, int requirement_id) { //드라이버가 자동차 설정
+		String sql = "UPDATE passenger SET requirement_id =? WHERE passenger_id=?";
 		conn = DBUtil.getConnect();
 		try {
 			pst = conn.prepareStatement(sql);
@@ -32,7 +33,7 @@ public class PassengerDAO {
 
 	public int loadPassegerId(Connection conn) throws SQLException {
 		int pid = 0;
-		String sql = "select max(passenger_id) from passenger";
+		String sql = "SELECT max(passenger_id) FROM passenger";
 		pst = conn.prepareStatement(sql);
 		rs = pst.executeQuery();
 		while (rs.next()) {
@@ -43,7 +44,7 @@ public class PassengerDAO {
 
 	public int createPassengerAccount(PassengerDTO passengerDTO) {
 		int result = 0;
-		String sql = "insert into passenger(passenger_id,passenger_name,passenger_phone,passenger_gender,asset,requirement_id) VALUES (passenger_seq.NEXTVAL,?,?,?,?,null)";
+		String sql = "INSERT INTO passenger(passenger_id,passenger_name,passenger_phone,passenger_gender,asset,requirement_id,protector_phone) VALUES (passenger_seq.NEXTVAL,?,?,?,?,NULL,?)";
 		conn = DBUtil.getConnect();
 		try {
 			conn.setAutoCommit(false);
@@ -53,11 +54,12 @@ public class PassengerDAO {
 			pst.setString(2, passengerDTO.getPassenger_phone());
 			pst.setString(3, passengerDTO.getPassenger_gender());
 			pst.setInt(4, passengerDTO.getAsset());
+			pst.setString(5, passengerDTO.getProtector_phone());
 			// pst.setInt(5,passengerDTO.getRequirement_id());
 			result = pst.executeUpdate();
 
 			int tmpid = loadPassegerId(conn);
-			LogDTO ldto = new LogDTO(tmpid, "탑승자 등록");//탑승자 등록로그
+			LogDTO ldto = new LogDTO(tmpid, "탑승자 등록");
 			LogAction.logInsert(conn, ldto);
 			conn.commit();
 		} catch (SQLException e) {
@@ -72,19 +74,14 @@ public class PassengerDAO {
 		return result;
 	}
 
-	public int Passenger_Asset(int asset, int passenger_id) { // 탑승자 자산 변경
-		String sql = "update passenger set asset= ? where passenger_id= ?";
+	public int Passenger_Asset(int asset, int passenger_id) { //드라이버가 운전범위 변경
+		String sql = "UPDATE passenger SET asset= ? WHERE passenger_id= ?";
 		conn = DBUtil.getConnect();
 		try {
-			conn.setAutoCommit(false);
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, asset);
 			pst.setInt(2, passenger_id);
 			count = pst.executeUpdate();
-
-			LogDTO ldto = new LogDTO(passenger_id, "탑승자  자산 변경");//탑승자 자산변경로그
-			LogAction.logInsert(conn, ldto);
-			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -97,14 +94,12 @@ public class PassengerDAO {
 
 		conn = DBUtil.getConnect();
 
-		String sql = "SELECT * from Passenger WHERE Passenger_ID = ?";
+		String sql = "SELECT * FROM Passenger WHERE Passenger_ID = ?";
 
 		PassengerDTO tmp = new PassengerDTO();
 		pst = conn.prepareStatement(sql);
 		pst.setInt(1, Passenger_id);
-		LogDTO ldto = new LogDTO(Passenger_id, "탑승자 로그인");//탑승자 등록로그
-		LogAction.logInsert(conn, ldto);
-		
+
 		rs = pst.executeQuery();
 		if (rs.next()) {
 			tmp.setPassenger_id(rs.getInt("passenger_id"));
@@ -117,10 +112,56 @@ public class PassengerDAO {
 		return tmp;
 	}
 
+	public void transferLog(int passengerID, String protector_phone, String passenger_name, int driver_id) {
+		conn = DBUtil.getConnect();
+		try {
+
+			LogDTO ldto = new LogDTO(passengerID, protector_phone + "에" + "'" + passenger_name + "가" + driver_id + "를 탔습니다 '" + "전송");
+			LogAction.logInsert(conn, ldto);
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getProtector_phone(int passengerID) {
+		String protector_phone = null;
+		conn = DBUtil.getConnect();
+		String sql = "SELECT protector_phone FROM Passenger WHERE Passenger_ID = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, passengerID);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				protector_phone = rs.getString("protector_phone");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return protector_phone;
+	}
+
+	public String getPassenger_name(int passengerID) {
+		String passenger_name = null;
+		conn = DBUtil.getConnect();
+		String sql = "SELECT passenger_name FROM Passenger WHERE Passenger_ID = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, passengerID);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				passenger_name = rs.getString("passenger_name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return passenger_name;
+	}
+
 	public int getRequirementID(int passengerID) {
 		int rID = 0;
 		conn = DBUtil.getConnect();
-		String sql = "SELECT requirement_id from Passenger WHERE Passenger_ID = ?";
+		String sql = "SELECT requirement_id FROM Passenger WHERE Passenger_ID = ?";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, passengerID);
@@ -134,13 +175,13 @@ public class PassengerDAO {
 		return rID;
 	}
 
-	// 이거 리턴이 -1이면 아이디 없다는거다. 로그인 못한다는것이다!!
+	//이거 리턴이 -1이면 아이디 없다는거다. 로그인 못한다는것이다!!
 	public int P_login(String passenger_phone, String passenger_name) throws Exception {
 
 		int tmp = -1;
 
 		conn = DBUtil.getConnect();
-		String sql = "SELECT * from PASSENGER WHERE PASSENGER_PHONE = ? AND  PASSENGER_NAME = ?";
+		String sql = "SELECT * FROM PASSENGER WHERE PASSENGER_PHONE = ? AND  PASSENGER_NAME = ?";
 
 		pst = conn.prepareStatement(sql);
 		pst.setString(1, passenger_phone);
@@ -151,36 +192,9 @@ public class PassengerDAO {
 			tmp = rs.getInt("passenger_id");
 		}
 
-<<<<<<< HEAD
-        return tmp;
-    }
 
-    public PassengerDTO getPassengerByID(int passenger_id) throws SQLException{
-
-        PassengerDTO result = null;
-
-        conn = DBUtil.getConnect();
-        String sql = "SELECT * FROM PASSENGER WHERE PASSENGER_ID = ?";
-
-        pst = conn.prepareStatement(sql);
-        pst.setInt(1,passenger_id);
-        rs = pst.executeQuery();
-
-        if(rs.next()){
-            result.setPassenger_id(passenger_id);
-            result.setPassenger_name(rs.getString("passenger_name"));
-            result.setPassenger_phone(rs.getString("passenger_phone"));
-            result.setPassenger_gender(rs.getString("passenger_gender"));
-            result.setAsset(rs.getInt("asset"));
-            result.setRequirement_id(rs.getInt("requirement_id"));
-        }
-
-        return result;
-
-    }
-=======
 		return tmp;
 
 	}
->>>>>>> 008122a5fa52a3a4cdbb30b2fb53b54e78ed49bb
+
 }
