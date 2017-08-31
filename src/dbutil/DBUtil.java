@@ -13,6 +13,7 @@ public class DBUtil {
 		String url= "jdbc:oracle:thin:@70.12.110.52:1521:xe";
 		String user="kober";
 		String password="kober";
+
 		 try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, user, password);

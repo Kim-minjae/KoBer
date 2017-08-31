@@ -26,7 +26,6 @@ public class MainController {
 
 		Loop1: while (true) {
 			System.out.println("다음 메뉴를 골라주세요 : ");
-
 			System.out.println("1.회원가입 ");
 			System.out.println("2.로그인 ");
 			System.out.println("3.어플리케이션 종료");
