@@ -14,12 +14,13 @@ public class DriverDTO implements Serializable {
 	int passenger_id;
 	int car_id;
 	
-	public DriverDTO(int driver_id, String driver_name, String drver_phone, String driver_gender, String current_pos,int car_id) {
+	public DriverDTO(int driver_id, String driver_name, String drver_phone, String driver_gender, int range,String current_pos,int car_id) {
 		super();
 		this.driver_id = driver_id;
 		this.driver_name = driver_name;
 		this.drver_phone = drver_phone;
 		this.driver_gender = driver_gender;
+		this.range=range;
 		this.current_pos = current_pos;
 		this.car_id=car_id;
 	}
