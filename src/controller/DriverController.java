@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import model.CarDAO;
 import model.DriverDAO;
 import model.DriverDTO;
+import view.DriverView;
 
 public class DriverController {
 
@@ -181,7 +182,7 @@ public class DriverController {
 	public void menu(DriverDTO driverDTO, int dId) {
 		while (true) {
 			System.out.println("====== 운전자 메뉴창입니다. 메뉴를 선택하세요 ======");
-			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경  0.종료 ");
+			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경 4.나의 정보  0.종료 ");
 			int choice = sc.nextInt();
 			DriverController dc = new DriverController();
 
@@ -211,6 +212,9 @@ public class DriverController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			case 4:
+				DriverView.driverInfo(driverDTO);
+				break;
 			case 0:
 				System.out.println("시스템 종료");
 				System.exit(0);
