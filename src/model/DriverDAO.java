@@ -15,6 +15,7 @@ public class DriverDAO {
     int count;
    //insert
     
+    
     public int loadDriverId(Connection conn) throws SQLException{
     	int dId = 0;
     	String sql = "select max(driver_id) from Driver";
@@ -63,13 +64,17 @@ public class DriverDAO {
  		}
  		return count;		
  	}
+   
+   
+   
    public int setCarID(DriverDTO dto,int carID){ //드라이버가 자동차 설정
 	   String sql="update driver set car_id=? where driver_id=?";		
 		conn = DBUtil.getConnect();
 		try {
+			int tempid = loadDriverId(conn);
 			st = conn.prepareStatement(sql);
 			st.setInt(1,carID);
-			st.setInt(2, dto.getDriver_id());
+			st.setInt(2, tempid);
 			count = st.executeUpdate(); 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -99,23 +104,24 @@ public class DriverDAO {
    }
 
    public int possibleToggle(int d_possible,int driver_id){ //드라이버가 운전가능여부
-	   String sql="update driver set d_possible=? where driver_id=?";		
+	   String sql="update driver set d_possible= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
 			st = conn.prepareStatement(sql);
 			st.setInt(1,d_possible);
 			st.setInt(2, driver_id);
-			count = st.executeUpdate(); 
+			count = st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			DBUtil.dbClose(conn, st, rs);
 		}
+		
 		return count;		
    }
    
    public int changeRange(int range,int driver_id){ //드라이버가 운전범위 변경
-	   String sql="update driver set range=? where driver_id=?";		
+	   String sql="update driver set range= ? where driver_id= ?";		
 		conn = DBUtil.getConnect();
 		try {
 			st = conn.prepareStatement(sql);
@@ -136,7 +142,7 @@ public class DriverDAO {
 
    	String sql = "SELECT * from DRIVER WHERE DRIVER_ID = ?";
 
-   	DriverDTO tmp = null;
+   	DriverDTO tmp = new DriverDTO();
 
    	st = conn.prepareStatement(sql);
    	st.setInt(1,driver_id);
@@ -144,13 +150,13 @@ public class DriverDAO {
    	rs = st.executeQuery();
 
    	if(rs.next()){
-   		tmp.setCar_id(driver_id);
+   		tmp.setDriver_id(rs.getInt("driver_id"));
    		tmp.setDrver_phone(rs.getString("driver_phone"));
    		tmp.setDriver_name(rs.getString("driver_name"));
    		tmp.setDriver_gender(rs.getString("driver_gender"));
    		tmp.setLicence_num(rs.getString("licence_num"));
    		tmp.setRange(rs.getInt("range"));
-   		tmp.setCurrent_pos(rs.getString("currnet_pos"));
+   		tmp.setCurrent_pos(rs.getString("current_pos"));
    		tmp.setDrive_possible(rs.getInt("d_possible"));
    		tmp.setPassenger_id(rs.getInt("passenger_id"));
    		tmp.setCar_id(rs.getInt("car_id"));

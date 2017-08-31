@@ -90,36 +90,32 @@ public class DriverController {
 		Loop7: while (true) { // 운전 가능한 범위
 			try {
 				System.out.println("운전 가능한 범위를 입력하세요(숫자로 입력). ex>30 : ");
-				range = sc.nextInt();
-
+				range = Integer.parseInt(sc.nextLine());
+				if (!(range > 0 && range < 20)) {
+					System.out.println("허용 범위를 벗어났습니다. 다시 입력하세요.");
+					continue Loop7;
+				}
 				System.out.println("드라이버 운전가능 여부, default는 OFF입니다.(자동입력)");
 				driver_possible = 0;
 				System.out.println("추후 운전 가능 여부를 변경해주세요");
 				System.out.println("=====================================");
-				if (range < 0 || range > 400) {
-					System.out.println("허용 범위를 벗어났습니다. 다시 입력하세요.");
-					continue Loop7;
-				}
 				dto = new DriverDTO(driver_name, driver_phone, driver_gender, licence_num, range, current_pos,
 						driver_possible);
 				result = dao.driverInsert(dto);
 				String msg = "입력 실패";
 				if (result > 0) {
 					System.out.println("운전자 정보 입력 성공");
+					break Loop7;
 				} else {
 					System.out.println(msg);
 				}
-				break;
 			} catch (NumberFormatException e) {
-				System.out.println("입력 포멧이 다릅니다. 다시 입력하세요.(숫자)");
-
-			} // catch
-
+			}
 		}
 
 	}// register
 
-	public void carInfoUpdate() throws Exception {//처음 차 등록 및 변경
+	public void carInfoUpdate() throws Exception {// 처음 차 등록 및 변경
 		cloop: while (true) {
 			CarDAO cdao = new CarDAO();
 			CarController carservice = new CarController();
@@ -131,8 +127,6 @@ public class DriverController {
 				carservice.CarRegisterService();
 				int cId = cdao.loadCarId();
 				dao.setCarID(dto, cId);
-				
-				System.out.println("차 정보 등록 완료");
 				break cloop;
 			} else if (yOrN.equalsIgnoreCase("n")) {
 				System.out.println("등록 취소");
@@ -144,14 +138,14 @@ public class DriverController {
 	}
 
 	// driver possible
-	public void driver_possible() throws Exception {
+	public void driver_possible(int dId) throws Exception {
 		ploop: while (true) {
-			int dId = dao.D_login(driver_phone, driver_name);
 			System.out.println("운전 가능하십니까 ? (Y/N)");
 			String yOrN = sc.nextLine();
 
 			if (yOrN.equalsIgnoreCase("y")) {
 				dao.possibleToggle(1, dId);
+				System.out.println(dId);
 				System.out.println("운행 가능(ON)");
 				break ploop;
 			} else if (yOrN.equalsIgnoreCase("n")) {
@@ -165,9 +159,8 @@ public class DriverController {
 	}
 
 	// driver possible
-	public void range_change() throws Exception {
+	public void range_change(int dId) throws Exception {
 		ploop: while (true) {
-			int dId = dao.D_login(driver_phone, driver_name);
 			System.out.println("범위를 수정하시겠습니까 ? (Y/N)");
 			String yOrN = sc.nextLine();
 
@@ -184,6 +177,49 @@ public class DriverController {
 				System.out.println("잘못 입력 하셨습니다.");
 			}
 		}
+	}
+
+	public void menu(DriverDTO driverDTO, int dId) {
+		while (true) {
+			System.out.println("====== 운전자 메뉴창입니다. 메뉴를 선택하세요 ======");
+			System.out.println("1.운전 가능 여부  2.가용범위 설정 3.자동차 변경 > 4.종료 ");
+			int choice = sc.nextInt();
+			DriverController dc = new DriverController();
+
+			switch (choice) {
+			case 1:
+				try {
+					dc.driver_possible(dId);
+					break;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 2:
+				try {
+					dc.range_change(dId);
+					break;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			case 3:
+				try {
+					dc.carInfoUpdate();
+					break;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case 0:
+				System.out.println("시스템 종료");
+				System.exit(0);
+				break;
+			default:
+			}
+		}
+
 	}
 
 }

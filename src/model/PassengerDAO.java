@@ -11,8 +11,26 @@ public class PassengerDAO {
 
     static Connection conn;
     static PreparedStatement pst;
-    Statement st;
     ResultSet rs;
+    int count = 0;
+    
+    
+    
+    public int setReqID(int passenger_id ,int requirement_id){ //드라이버가 자동차 설정
+ 	   String sql="update passenger set requirement_id =? where passenger_id=?";		
+ 		conn = DBUtil.getConnect();
+ 		try {
+ 			pst = conn.prepareStatement(sql);
+ 			pst.setInt(1,requirement_id);
+ 			pst.setInt(2, passenger_id);
+ 			count = pst.executeUpdate(); 
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			DBUtil.dbClose(conn, pst, rs);
+ 		}
+ 		return count;		
+    }
     
     public int loadPassegerId(Connection conn) throws SQLException{
     	int pid = 0;
@@ -55,7 +73,61 @@ public class PassengerDAO {
         }
         return result;
     }
+    
+    public int Passenger_Asset(int asset,int passenger_id){ //드라이버가 운전범위 변경
+ 	   String sql="update passenger set asset= ? where passenger_id= ?";		
+ 		conn = DBUtil.getConnect();
+ 		try {
+ 			pst = conn.prepareStatement(sql);
+ 			pst.setInt(1,asset);
+ 			pst.setInt(2, passenger_id);
+ 			count = pst.executeUpdate(); 
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			DBUtil.dbClose(conn, pst, rs);
+ 		}
+ 		return count;		
+    }
+    
+    public PassengerDTO getPassenger(int Passenger_id)throws SQLException{
 
+       	conn = DBUtil.getConnect();
+
+       	String sql = "SELECT * from Passenger WHERE Passenger_ID = ?";
+
+       	PassengerDTO tmp = new PassengerDTO();
+       	pst = conn.prepareStatement(sql);
+       	pst.setInt(1,Passenger_id);
+
+       	rs = pst.executeQuery();
+       	if(rs.next()){
+       		tmp.setPassenger_id(rs.getInt("passenger_id"));
+       		tmp.setPassenger_name(rs.getString("passenger_name"));
+       		tmp.setPassenger_phone(rs.getString("passenger_phone"));
+       		tmp.setPassenger_gender(rs.getString("passenger_gender"));
+       		tmp.setAsset(rs.getInt("asset"));
+       		tmp.setRequirement_id(rs.getInt("requirement_id"));
+    	}
+       		return tmp;
+       }
+    
+    public int getRequirementID(int passengerID){
+    	int rID=0;
+     	conn = DBUtil.getConnect();
+       	String sql = "SELECT requirement_id from Passenger WHERE Passenger_ID = ?";
+       	try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1,passengerID);
+			rs = pst.executeQuery();
+			if(rs.next()){
+				rID=rs.getInt("requirement_id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+       	return rID;  	
+    }
     //이거 리턴이 -1이면 아이디 없다는거다. 로그인 못한다는것이다!!
     public int P_login(String passenger_phone, String passenger_name) throws Exception{
 
