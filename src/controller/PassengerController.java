@@ -168,15 +168,26 @@ public class PassengerController {
 				rdto=rdao.makeRdto(reqID);
 				driverlist=rdao.showAvailableDriverList(rdto);
 				DriverView.print(driverlist);	
+				System.out.println();
 				System.out.print("선택할 드라이버 ID를 입력해주세요: ");
 			    int driver_id=Integer.parseInt(br.readLine());
-			    
+			    System.out.println();
 				String protector_phone=dao.getProtector_phone(pID);
 				String passenger_name=dao.getPassenger_name(pID);		
+				String protector_phone2="";
+				for(int i=0;i<11;i++)
+				{
+					protector_phone2=protector_phone2+protector_phone.charAt(i);
+					if(i==2 || i==6){
+						protector_phone2=protector_phone2+"-";
+					}
+				}
 				if(protector_phone!=null)
 				{
-					System.out.println(passenger_name+"회원님이 "+driver_id+"번 택시를 탑승하셨습니다." );
-				System.out.println(protector_phone+"번으로 이 내용을 전송합니다.");
+					System.out.println("회원님은 등록된 보호자 번호가 있습니다.");
+					System.out.println("["+passenger_name+"회원님이 "+driver_id+"번 택시를 탑승하셨습니다.]" );
+					System.out.println("["+protector_phone2+"번으로 이 내용을 전송합니다.]");
+					System.out.println();
 					//dao.transferLog(pID,protector_phone, passenger_name, driver_id);					
 				}
 				
