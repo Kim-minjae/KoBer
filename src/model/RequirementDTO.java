@@ -8,7 +8,6 @@ public class RequirementDTO {
 	private int fellow_num;
 
 	public RequirementDTO() {
-		super();
 	}
 
 	public RequirementDTO(int demand_id, String start_point, String destination, int fellow_num) {

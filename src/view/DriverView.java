@@ -27,11 +27,6 @@ public class DriverView {
 				}
 			}
 			System.out.printf("ID:%d\t"+"이름:%s\t"+"폰번호:%s\t"+"성별:%s\t   "+"현재위치:[%c.%c]\n",st.getDriver_id(),st.getDriver_name(),phone2,gender,st.getCurrent_pos().charAt(0),st.getCurrent_pos().charAt(2));
-			/*
-			System.out.print("ID: "+st.getDriver_id()+" 이름: "+st.getDriver_name()+" 폰번호: "+st.getDrver_phone()+
-					" 성별: "+st.getDriver_gender()+" 현재 위치: "+"["+st.getCurrent_pos().charAt(0)+"."+st.getCurrent_pos().charAt(2)+"]");
-			System.out.println();
-			*/
 			
 		}
 

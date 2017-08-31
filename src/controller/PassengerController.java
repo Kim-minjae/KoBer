@@ -164,7 +164,7 @@ public class PassengerController {
 				break;
 			case 3:
 				int reqID=dao.getRequirementID(pID);
-				RequirementDTO rdto=new RequirementDTO();
+				RequirementDTO rdto= new RequirementDTO();
 				rdto=rdao.makeRdto(reqID);
 				driverlist=rdao.showAvailableDriverList(rdto);
 				DriverView.print(driverlist);	
@@ -177,7 +177,7 @@ public class PassengerController {
 				String protector_phone2="";
 				for(int i=0;i<11;i++)
 				{
-					protector_phone2=protector_phone2+protector_phone.charAt(i);
+					protector_phone2=protector_phone2 + protector_phone.charAt(i);
 					if(i==2 || i==6){
 						protector_phone2=protector_phone2+"-";
 					}
@@ -188,7 +188,7 @@ public class PassengerController {
 					System.out.println("["+passenger_name+"회원님이 "+driver_id+"번 택시를 탑승하셨습니다.]" );
 					System.out.println("["+protector_phone2+"번으로 이 내용을 전송합니다.]");
 					System.out.println();
-					//dao.transferLog(pID,protector_phone, passenger_name, driver_id);					
+					dao.transferLog(pID,protector_phone, passenger_name, driver_id);
 				}
 				
 				

@@ -116,7 +116,7 @@ public class PassengerDAO {
 		conn = DBUtil.getConnect();
 		try {
 
-			LogDTO ldto = new LogDTO(passengerID, protector_phone + "에" + "'" + passenger_name + "가" + driver_id + "를 탔습니다 '" + "전송");
+			LogDTO ldto = new LogDTO(passengerID, protector_phone + "에" + "'" + passenger_name + "가" + driver_id + "를 탔습니다 ->'" + "전송");
 			LogAction.logInsert(conn, ldto);
 			conn.commit();
 		} catch (SQLException e) {

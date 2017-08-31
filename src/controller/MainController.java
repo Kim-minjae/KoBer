@@ -1,20 +1,19 @@
 package controller;
 
-import model.DriverDAO;
-import model.DriverDTO;
-import model.PassengerDAO;
-import model.PassengerDTO;
+import model.*;
+import view.LogView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.StringTokenizer;
 
 /**
  * Created by pose2 on 2017-08-25.
  */
 public class MainController {
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws IOException, SQLException {
 
 		DriverDAO driverDAO = new DriverDAO();
 		PassengerDAO passengerDAO = new PassengerDAO();
@@ -22,6 +21,7 @@ public class MainController {
 		PassengerController psc=new PassengerController();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
+
 		boolean session = true;
 
 		Loop1: while (true) {
@@ -29,9 +29,10 @@ public class MainController {
 			System.out.println("1.회원가입 ");
 			System.out.println("2.로그인 ");
 			System.out.println("3.어플리케이션 종료");
+			System.out.println("4.로그보기");
 			String tmp = br.readLine();
 
-			if (!tmp.equals("1") && !tmp.equals("2")&& !tmp.equals("3")) {
+			if (!tmp.equals("1") && !tmp.equals("2")&& !tmp.equals("3") && !tmp.equals("4")) {
 				continue Loop1;
 			} else {
 
@@ -124,10 +125,20 @@ public class MainController {
 						e.printStackTrace();
 					}
 					break Loop1;
+
+
 				case "3":
 					System.out.println("서비스를 종료합니다. -Bye-");
-					System.exit(0);
-				default:
+					return;
+
+					case "4" :
+						LogView.printall(LogAction.getLogAll());
+						break Loop1;
+
+
+
+
+					default:
 					System.out.println("맞는 케이스가 없습니다.");
 					continue Loop1;
 				}
