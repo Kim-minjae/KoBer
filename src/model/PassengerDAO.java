@@ -45,7 +45,7 @@ public class PassengerDAO {
     
     public int createPassengerAccount(PassengerDTO passengerDTO) {
     	int result=0;
-    	String sql = "insert into passenger(passenger_id,passenger_name,passenger_phone,passenger_gender,asset,requirement_id) VALUES (passenger_seq.NEXTVAL,?,?,?,?,null)";
+    	String sql = "insert into passenger(passenger_id,passenger_name,passenger_phone,passenger_gender,asset,requirement_id,protector_phone) VALUES (passenger_seq.NEXTVAL,?,?,?,?,null,?)";
         conn = DBUtil.getConnect();
         try{
         	conn.setAutoCommit(false);
@@ -55,6 +55,7 @@ public class PassengerDAO {
             pst.setString(2,passengerDTO.getPassenger_phone());
             pst.setString(3,passengerDTO.getPassenger_gender()); 
             pst.setInt(4,passengerDTO.getAsset());
+            pst.setString(5, passengerDTO.getProtector_phone());
            // pst.setInt(5,passengerDTO.getRequirement_id());
             result=pst.executeUpdate();
             
@@ -111,7 +112,50 @@ public class PassengerDAO {
     	}
        		return tmp;
        }
+    public void transferLog(int passengerID, String protector_phone, String passenger_name, int driver_id){
+    	   conn = DBUtil.getConnect();
+		try {
+			
+			 LogDTO ldto = new LogDTO(passengerID,protector_phone+"에"+"'"+passenger_name+"가"+driver_id+ "를 탔습니다 '"+"전송");
+	          LogAction.logInsert(conn, ldto);
+	           conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}    
+    }
     
+    public String getProtector_phone(int passengerID){
+    	String protector_phone=null;
+     	conn = DBUtil.getConnect();
+       	String sql = "SELECT protector_phone from Passenger WHERE Passenger_ID = ?";
+       	try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1,passengerID);
+			rs = pst.executeQuery();
+			if(rs.next()){
+				protector_phone=rs.getString("protector_phone");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+       	return protector_phone;  	
+    }
+    public String getPassenger_name(int passengerID){
+    	String passenger_name=null;
+     	conn = DBUtil.getConnect();
+       	String sql = "SELECT passenger_name from Passenger WHERE Passenger_ID = ?";
+       	try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1,passengerID);
+			rs = pst.executeQuery();
+			if(rs.next()){
+				passenger_name=rs.getString("passenger_name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+       	return passenger_name;	
+    }
     public int getRequirementID(int passengerID){
     	int rID=0;
      	conn = DBUtil.getConnect();

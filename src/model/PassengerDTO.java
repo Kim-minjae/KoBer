@@ -10,20 +10,36 @@ public class PassengerDTO {
     private String passenger_gender;
     private int asset;
     private int requirement_id;
+    private String Protector_phone; 
+    
     public PassengerDTO(){
 
     }
 
-    public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, String passenger_gender, int asset, int requirement_id) {
-        this.passenger_id = passenger_id;
-        this.passenger_name = passenger_name;
-        this.passenger_phone = passenger_phone;
-        this.passenger_gender = passenger_gender;
-        this.asset = asset;
-        this.requirement_id = requirement_id;
-    }
+   
+    public String getProtector_phone() {
+		return Protector_phone;
+	}
 
-    public int getPassenger_id() {
+
+	public void setProtector_phone(String protector_phone) {
+		Protector_phone = protector_phone;
+	}
+
+
+	public PassengerDTO(int passenger_id, String passenger_name, String passenger_phone, String passenger_gender,
+			int asset, int requirement_id, String protector_phone) {
+		super();
+		this.passenger_id = passenger_id;
+		this.passenger_name = passenger_name;
+		this.passenger_phone = passenger_phone;
+		this.passenger_gender = passenger_gender;
+		this.asset = asset;
+		this.requirement_id = requirement_id;
+		Protector_phone = protector_phone;
+	}
+
+	public int getPassenger_id() {
         return passenger_id;
     }
 

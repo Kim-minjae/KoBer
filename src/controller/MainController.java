@@ -31,7 +31,7 @@ public class MainController {
 			System.out.println("2.로그인 ");
 			System.out.println("3.어플리케이션 종료");
 			String tmp = br.readLine();
-			if (!tmp.equals("1") && !tmp.equals("2")) {
+			if (!tmp.equals("1") && !tmp.equals("2") && !tmp.equals("3")) {
 				continue Loop1;
 			} else {
 
@@ -60,6 +60,7 @@ public class MainController {
 						//회원가입 절차 
 						 PassengerController passengerService = new PassengerController();
 						 passengerService.passengerInsertService();
+						 continue Loop1;
 					}
 
 					break Loop1;
@@ -115,10 +116,8 @@ public class MainController {
 									System.out.println("입력형식이 잘못되었습니다. 다시 입력해주세요");
 									break Loop2;
 								}
-
 							}
 						}
-
 						break;
 					} catch (Exception e) {
 						e.printStackTrace();
