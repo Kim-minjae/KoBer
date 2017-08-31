@@ -40,7 +40,7 @@ public class RequirementDAO {
 	    	 return rId;
 	    }
 	    
-	
+
 	public RequirementDTO getRequirement(int r_id) {
 		RequirementDTO dto = null;
 		conn = DBUtil.getConnect();
@@ -67,6 +67,7 @@ public class RequirementDAO {
 		return dto;
 
 	}
+
 
 	public int RequirementInsert(RequirementDTO rdto) {
 		conn = DBUtil.getConnect();

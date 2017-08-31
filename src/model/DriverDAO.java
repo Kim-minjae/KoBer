@@ -150,6 +150,26 @@ public class DriverDAO {
 		}
 		return count;		
    }
+
+	public int changeCurrentPos(String current_pos,int driver_id){ //드라이버가 운전범위 변경
+		String sql="update driver set CURRENT_POS= ? where driver_id= ?";
+		conn = DBUtil.getConnect();
+		try {
+			conn.setAutoCommit(false);
+			st = conn.prepareStatement(sql);
+			st.setString(1,current_pos);
+			st.setInt(2, driver_id);
+			count = st.executeUpdate();
+			LogDTO ldto = new LogDTO(driver_id,"운전자 탑승자 위치" + current_pos+" 에 모셔다드림 ");
+			LogAction.logInsert(conn, ldto);
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbClose(conn, st, rs);
+		}
+		return count;
+	}
    
    public DriverDTO getDriverByID(int driver_id)throws SQLException{
 

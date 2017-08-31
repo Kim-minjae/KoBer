@@ -11,7 +11,8 @@ public class PassengerDTO {
     private int asset;
     private int requirement_id;
     private String Protector_phone; 
-    
+
+
     public PassengerDTO(){
 
     }

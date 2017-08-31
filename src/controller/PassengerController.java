@@ -3,14 +3,11 @@ package controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import model.DriverDTO;
-import model.PassengerDAO;
-import model.PassengerDTO;
-import model.RequirementDAO;
-import model.RequirementDTO;
+import model.*;
 import view.DriverView;
 
 /**
@@ -135,7 +132,7 @@ public class PassengerController {
 		}
 	}
 
-	public void passenger_menu(PassengerDTO passengerDTO, int pID) throws NumberFormatException, IOException{
+	public void passenger_menu(PassengerDTO passengerDTO, int pID) throws NumberFormatException, IOException, SQLException {
 		List<DriverDTO> driverlist = null;
 		while(true){
 			System.out.println("====== 탑승자 메뉴창입니다. 메뉴를 선택하세요 ======");
@@ -171,6 +168,10 @@ public class PassengerController {
 				System.out.println();
 				System.out.print("선택할 드라이버 ID를 입력해주세요: ");
 			    int driver_id=Integer.parseInt(br.readLine());
+
+			    DriverDAO driverDAO = new DriverDAO();
+			    driverDAO.changeCurrentPos(rdto.getDestination(),driver_id);
+
 			    System.out.println();
 				String protector_phone=dao.getProtector_phone(pID);
 				String passenger_name=dao.getPassenger_name(pID);		

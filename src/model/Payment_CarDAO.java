@@ -25,4 +25,27 @@ public class Payment_CarDAO {
   		}
   		return count;		
   	}
+//this is what I ve done last night
+  	public int costByCartype (String carType){
+		int price = 0;
+
+		String sql = "SELECT PRICE FROM PAYMENT_CAR WHERE  CAR_TYPE = ?";
+		conn = DBUtil.getConnect();
+		try{
+			st = conn.prepareStatement(sql);
+			st.setString(1,carType);
+			rs = st.executeQuery();
+
+			if(rs.next()){
+				price = rs.getInt("price");
+			}
+
+
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtil.dbClose(conn,st,rs);
+		}
+		return price;
+	}
 }
