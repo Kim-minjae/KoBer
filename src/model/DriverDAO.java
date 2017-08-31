@@ -158,12 +158,12 @@ public class DriverDAO {
    	String sql = "SELECT * from DRIVER WHERE DRIVER_ID = ?";
 
    	DriverDTO tmp = new DriverDTO();
-
    	st = conn.prepareStatement(sql);
    	st.setInt(1,driver_id);
 
    	rs = st.executeQuery();
-
+   	LogDTO ldto = new LogDTO(driver_id,"운전자 로그인");
+    LogAction.logInsert(conn, ldto);
    	if(rs.next()){
    		tmp.setDriver_id(rs.getInt("driver_id"));
    		tmp.setDrver_phone(rs.getString("driver_phone"));
@@ -189,7 +189,7 @@ public class DriverDAO {
 
 		conn = DBUtil.getConnect();
 		String sql = "SELECT * from DRIVER WHERE  DRIVER_PHONE= ? AND  DRIVER_NAME = ?";
-		conn.setAutoCommit(false);
+
 		st = conn.prepareStatement(sql);
 		st.setString(1,driver_phone);
 		st.setString(2,driver_name);
@@ -198,9 +198,7 @@ public class DriverDAO {
 		if(rs.next()){
 			tmp = rs.getInt("driver_id");
 		}
-		LogDTO ldto = new LogDTO(tmp,"운전 가용범위 변경");
-        LogAction.logInsert(conn, ldto);
-        conn.commit();
+	
 		return tmp;
 
 	}
