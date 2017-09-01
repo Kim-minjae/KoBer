@@ -32,7 +32,7 @@ public class LogAction {
  	public static List<LogDTO> getLogAll() throws SQLException {
    		List<LogDTO> tmp = new ArrayList<LogDTO>();
 		conn = DBUtil.getConnect();
-		String sql = "SELECT * FROM LOG";
+		String sql = "SELECT * FROM LOG order by log_id";
 		pst = conn.prepareStatement(sql);
 		rs = pst.executeQuery();
 

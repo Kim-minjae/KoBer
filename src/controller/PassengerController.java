@@ -134,7 +134,7 @@ public class PassengerController {
 
 	public void passenger_menu(PassengerDTO passengerDTO, int pID) throws NumberFormatException, IOException, SQLException {
 		List<DriverDTO> driverlist = null;
-		while(true){
+		Loop2 : while(true){
 			System.out.println("====== 탑승자 메뉴창입니다. 메뉴를 선택하세요 ======");
 			System.out.println("1.요구 사항 등록 2. 자산 변경 3. 탑승 하기 4.종료 ");
 			RequirementController rc=new RequirementController();
@@ -160,6 +160,7 @@ public class PassengerController {
 				}
 				break;
 			case 3:
+				
 				int reqID=dao.getRequirementID(pID);
 				RequirementDTO rdto= new RequirementDTO();
 				rdto=rdao.makeRdto(reqID);
@@ -171,8 +172,11 @@ public class PassengerController {
 
 			    DriverDAO driverDAO = new DriverDAO();
 			    driverDAO.changeCurrentPos(rdto.getDestination(),driver_id);
+			    
 
 			    System.out.println();
+			    int requirement_ID=dao.getRequirementID(pID);
+			    String dst_location=rdao.getDst_Location(requirement_ID);
 				String protector_phone=dao.getProtector_phone(pID);
 				String passenger_name=dao.getPassenger_name(pID);		
 				String protector_phone2="";
@@ -191,6 +195,9 @@ public class PassengerController {
 					System.out.println();
 					dao.transferLog(pID,protector_phone, passenger_name, driver_id);
 				}
+				System.out.println("목적지["+dst_location+"]에 안전하게 도착하였습니다.");
+				System.out.println("드라이버의 현재 위치가 [" + dst_location+"]로 갱신됩니다.");
+				System.out.println();
 				
 				
 				/*

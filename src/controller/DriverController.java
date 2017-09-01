@@ -22,8 +22,7 @@ public class DriverController {
 	public void DriverRegisterService() throws Exception {
 		// public static void main(String[] args) {
 
-		System.out.println("─────────운전자 정보 등록창입니다.─────────");
-		System.out.println("─────────────────────────────────");
+		System.out.println("─────────운전자 정보 등록창입니다─────────");
 
 		Loop1: while (true) {
 			System.out.println("운전자의 이름을 입력하세요: ");

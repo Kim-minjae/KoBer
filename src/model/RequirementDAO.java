@@ -67,6 +67,23 @@ public class RequirementDAO {
 		return dto;
 
 	}
+	
+	public String getDst_Location(int requiremnetID) {
+		String destination = null;
+		conn = DBUtil.getConnect();
+		String sql = "SELECT destination FROM requirement WHERE requirement_id = ?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, requiremnetID);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				destination = rs.getString("destination");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return destination;
+	}
 
 
 	public int RequirementInsert(RequirementDTO rdto) {
